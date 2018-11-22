@@ -4,13 +4,12 @@ import com.softserve.librarymanager.dao.BookDao;
 import com.softserve.librarymanager.dao.table.AuthorBookColumns;
 import com.softserve.librarymanager.dao.table.AuthorColumns;
 import com.softserve.librarymanager.dao.table.BookColumns;
-import com.softserve.librarymanager.dao.table.Tables;
+import com.softserve.librarymanager.dao.table.Table;
 import com.softserve.librarymanager.dao.table.util.ColumnUtil;
 import com.softserve.librarymanager.dao.util.QueryUtil;
 import com.softserve.librarymanager.db.ParameterizedStatement;
 import com.softserve.librarymanager.db.builder.SelectQueryBuilder;
 import com.softserve.librarymanager.model.Book;
-import sun.tracing.PrintStreamProviderFactory;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +31,7 @@ public class BookDaoImpl implements BookDao {
 
     static {
         SELECT_ALL_BOOKS_BY_AUTHOR_ID = new SelectQueryBuilder().select().addColumn(BookColumns.ALL.alias())
-                .from(Tables.GENRE.aliasedTable()).innerJoin(Tables.AUTHOR_BOOK.aliasedTable())
+                .from(Table.GENRE.aliasedTable()).innerJoin(Table.AUTHOR_BOOK.aliasedTable())
                 .on(BookColumns.ID.alias(), AuthorBookColumns.BOOK_ID.alias())
                 .where().equal(AuthorColumns.ID.alias(), AuthorColumns.ID.aliasedParam()).buildQuery();
     }
@@ -77,7 +76,7 @@ public class BookDaoImpl implements BookDao {
             parameterizedStatement.setInt(BookColumns.ID.param(), id);
             ResultSet resultSet = parameterizedStatement.getPreparedStatement().executeQuery();
             resultSet.next();
-            book = toBook(resultSet, Tables.NO_TABLE.alias());
+            book = toBook(resultSet, Table.NO_TABLE.alias());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -91,7 +90,7 @@ public class BookDaoImpl implements BookDao {
             parameterizedStatement = new ParameterizedStatement(SELECT_ALL_BOOKS);
             ResultSet resultSet = parameterizedStatement.getPreparedStatement().executeQuery();
             while (resultSet.next()) {
-                Book book = toBook(resultSet, Tables.NO_TABLE.alias());
+                Book book = toBook(resultSet, Table.NO_TABLE.alias());
                 books.add(book);
             }
         } catch (SQLException e) {
@@ -108,7 +107,7 @@ public class BookDaoImpl implements BookDao {
             parameterizedStatement.setInt(AuthorColumns.ID.aliasedParam(), bookId);
             ResultSet resultSet = parameterizedStatement.getPreparedStatement().executeQuery();
             while (resultSet.next()) {
-                Book book = toBook(resultSet, Tables.GENRE.alias());
+                Book book = toBook(resultSet, Table.GENRE.alias());
                 books.add(book);
             }
         } catch (SQLException e) {

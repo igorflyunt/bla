@@ -1,6 +1,6 @@
 package com.softserve.librarymanager.dao.table;
 
-public enum Tables {
+public enum Table {
     GENRE("genre", "g"),
     AUTHOR("author", "a"),
     BOOK("book", "b"),
@@ -12,7 +12,7 @@ public enum Tables {
     private String tableName;
     private String tableAlias;
 
-    Tables(String tableName, String tableAlias) {
+    Table(String tableName, String tableAlias) {
         this.tableName = tableName;
         this.tableAlias = tableAlias;
     }

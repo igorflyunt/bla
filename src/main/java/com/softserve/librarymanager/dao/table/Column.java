@@ -1,6 +1,6 @@
 package com.softserve.librarymanager.dao.table;
 
-interface Column {
+public interface Column {
     String alias();
 
     String param();

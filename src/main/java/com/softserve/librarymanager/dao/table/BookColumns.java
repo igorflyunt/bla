@@ -15,7 +15,7 @@ public enum BookColumns implements Column {
 
     @Override
     public String alias() {
-        return String.format(ColumnFormat.ALIAS, Tables.BOOK.alias(), field);
+        return String.format(ColumnFormat.ALIAS, Table.BOOK.alias(), field);
     }
 
     @Override

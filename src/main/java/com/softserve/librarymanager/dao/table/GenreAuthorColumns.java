@@ -12,7 +12,7 @@ public enum  GenreAuthorColumns implements Column {
 
     @Override
     public  String alias() {
-        return String.format(ColumnFormat.ALIAS, Tables.GENRE_AUTHOR.alias(), field);
+        return String.format(ColumnFormat.ALIAS, Table.GENRE_AUTHOR.alias(), field);
     }
 
     @Override

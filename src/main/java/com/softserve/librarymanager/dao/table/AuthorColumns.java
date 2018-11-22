@@ -15,7 +15,7 @@ public enum AuthorColumns implements Column {
 
     @Override
     public String alias() {
-        return String.format(ColumnFormat.ALIAS, Tables.AUTHOR.alias(), field);
+        return String.format(ColumnFormat.ALIAS, Table.AUTHOR.alias(), field);
     }
 
     @Override

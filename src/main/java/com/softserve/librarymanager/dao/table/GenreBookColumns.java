@@ -12,7 +12,7 @@ public enum GenreBookColumns implements Column {
 
     @Override
     public  String alias() {
-        return String.format(ColumnFormat.ALIAS, Tables.GENRE_BOOK.alias(), field);
+        return String.format(ColumnFormat.ALIAS, Table.GENRE_BOOK.alias(), field);
     }
 
     @Override

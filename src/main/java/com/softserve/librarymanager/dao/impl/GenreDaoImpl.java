@@ -4,7 +4,7 @@ import com.softserve.librarymanager.dao.GenreDao;
 import com.softserve.librarymanager.dao.table.GenreAuthorColumns;
 import com.softserve.librarymanager.dao.table.GenreBookColumns;
 import com.softserve.librarymanager.dao.table.GenreColumns;
-import com.softserve.librarymanager.dao.table.Tables;
+import com.softserve.librarymanager.dao.table.Table;
 import com.softserve.librarymanager.dao.table.util.ColumnUtil;
 import com.softserve.librarymanager.db.ParameterizedStatement;
 import com.softserve.librarymanager.db.builder.SelectQueryBuilder;
@@ -27,20 +27,20 @@ public class GenreDaoImpl implements GenreDao {
 
     static {
         SELECT_GENRE_BY_ID_QUERY =  new SelectQueryBuilder().select().addColumn(GenreColumns.ALL.field())
-                .from(Tables.GENRE.table())
+                .from(Table.GENRE.table())
                 .where().equal(GenreColumns.ID.field(), GenreColumns.ID.param()).buildQuery();
 
         SELECT_GENRE_BY_AUTHOR_ID_QUERY = new SelectQueryBuilder().select()
-                .addColumn(GenreColumns.ALL.alias()).from(Tables.GENRE.aliasedTable())
-                .innerJoin(Tables.AUTHOR.aliasedTable())
+                .addColumn(GenreColumns.ALL.alias()).from(Table.GENRE.aliasedTable())
+                .innerJoin(Table.AUTHOR.aliasedTable())
                 .on(GenreColumns.ID.alias(), GenreAuthorColumns.GENRE_ID.alias())
                 .where().equal(GenreAuthorColumns.AUTHOR_ID.alias(), GenreAuthorColumns.AUTHOR_ID.aliasedParam())
                 .buildQuery();
 
         SELECT_GENRE_BY_BOOK_ID_QUERY = new SelectQueryBuilder().select()
                 .addColumn(GenreColumns.ALL.alias())
-                .from(Tables.GENRE.aliasedTable())
-                .innerJoin(Tables.GENRE_BOOK.aliasedTable())
+                .from(Table.GENRE.aliasedTable())
+                .innerJoin(Table.GENRE_BOOK.aliasedTable())
                 .on(GenreColumns.ID.alias(), GenreBookColumns.GENRE_ID.alias())
                 .where()
                 .equal(GenreBookColumns.BOOK_ID.alias(), GenreBookColumns.BOOK_ID.aliasedParam())
@@ -97,7 +97,7 @@ public class GenreDaoImpl implements GenreDao {
             if (!resultSet.next()) {
                 return null;
             }
-            genre = toGenre(resultSet, Tables.NO_TABLE.alias());
+            genre = toGenre(resultSet, Table.NO_TABLE.alias());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -112,7 +112,7 @@ public class GenreDaoImpl implements GenreDao {
             parameterizedStatement.setInt(GenreBookColumns.BOOK_ID.aliasedParam(), bookId);
             PreparedStatement preparedStatement = parameterizedStatement.getPreparedStatement();
             ResultSet resultSet = preparedStatement.executeQuery();
-            genres = toGenreList(resultSet, Tables.GENRE.alias());
+            genres = toGenreList(resultSet, Table.GENRE.alias());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -126,7 +126,7 @@ public class GenreDaoImpl implements GenreDao {
             parameterizedStatement = new ParameterizedStatement(SELECT_GENRE_BY_AUTHOR_ID_QUERY);
             parameterizedStatement.setInt(GenreAuthorColumns.AUTHOR_ID.aliasedParam(), authorId);
             PreparedStatement statement = parameterizedStatement.getPreparedStatement();
-            genres = toGenreList(statement.executeQuery(), Tables.GENRE.alias());
+            genres = toGenreList(statement.executeQuery(), Table.GENRE.alias());
         } catch (SQLException e) {
             e.printStackTrace();
         }
