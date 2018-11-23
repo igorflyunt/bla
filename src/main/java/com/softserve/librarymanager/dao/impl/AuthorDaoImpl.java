@@ -8,7 +8,6 @@ import com.softserve.librarymanager.dao.table.Table;
 import com.softserve.librarymanager.dao.table.TableDefinition;
 import com.softserve.librarymanager.dao.table.column.AuthorColumns;
 import com.softserve.librarymanager.model.Author;
-import com.softserve.librarymanager.model.Book;
 
 import java.util.List;
 
@@ -42,11 +41,11 @@ public class AuthorDaoImpl extends GenericDao<Author> implements AuthorDao, Dao<
 
     @Override
     public void save(Author entity) {
-        if (doesEntityExists(entity.getId())) {
-            save(entity, SQL_INSERT_AUTHOR, entity.getFirstName(), entity.getLastName(), entity.getBirthDate());
-        } else {
+        if (entityExists(entity.getId())) {
             save(entity, SQL_UPDATE_AUTHOR, entity.getFirstName(), entity.getLastName(), entity.getBirthDate(),
                     entity.getId());
+        } else {
+            save(entity, SQL_INSERT_AUTHOR, entity.getFirstName(), entity.getLastName(), entity.getBirthDate());
         }
     }
 }

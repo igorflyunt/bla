@@ -73,7 +73,7 @@ public abstract class GenericDao<E extends AbstractEntity> implements Dao<E> {
         System.out.println(query);
     }
 
-    protected boolean doesEntityExists(int id) {
+    protected boolean entityExists(int id) {
         return findById(id).isPresent();
     }
 

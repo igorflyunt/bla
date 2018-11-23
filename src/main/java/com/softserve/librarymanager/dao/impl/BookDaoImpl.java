@@ -44,12 +44,12 @@ public class BookDaoImpl extends GenericDao<Book> implements BookDao, Dao<Book> 
 
     @Override
     public void save(Book entity) {
-        if (doesEntityExists(entity.getId())) {
-            save(entity, SQL_UPDATE_BOOK, entity.getName(), entity.getDescription(),
-                    entity.getFirstPublished(), entity.getId());
-        } else {
+        if (entityExists(entity.getId())) {
             save(entity, SQL_INSERT_BOOK, entity.getName(), entity.getDescription(),
                     entity.getFirstPublished());
+        } else {
+            save(entity, SQL_UPDATE_BOOK, entity.getName(), entity.getDescription(),
+                    entity.getFirstPublished(), entity.getId());
         }
     }
 }
