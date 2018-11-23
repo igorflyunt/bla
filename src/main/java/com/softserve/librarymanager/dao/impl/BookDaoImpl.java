@@ -15,22 +15,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookDaoImpl extends GenericCRUD<Book> implements BookDao, Dao<Book> {
-    private final String bookAlias = Table.BOOK.alias();
-    private final String authorAlias = Table.AUTHOR_BOOK.alias();
+    private static final String bookAlias = Table.BOOK.alias();
+    private static final String authorAlias = Table.AUTHOR_BOOK.alias();
 
     private static final String SQL_INSERT_BOOK = "insert into book (name, description, first_published)" +
-            " values (:name, :description, :first_published)";
+            " values (?, ?, ?)";
     private static final String SQL_UPDATE_BOOK = "update book" +
-            " set name = :name," +
-            " description = :description," +
-            " first_published = :first_published where id = :id";
+            " set name = ?, description = ?," +
+            " first_published = ?" +
+            " where id = ?";
 
     private static final String SQL_SELECT_BOOKS_BY_AUTHOR_ID = String.format("select %s.* from book %s" +
             " inner join author_book %s" +
             " on %s.id = %s.book_id" +
             " where %s.author_id = ?",
-            Table.BOOK.alias(), Table.BOOK.alias(), Table.AUTHOR_BOOK.alias(), Table.AUTHOR.alias(),
-            Table.AUTHOR_BOOK.alias(), Table.AUTHOR_BOOK.alias());
+            bookAlias, bookAlias, authorAlias, bookAlias, authorAlias, authorAlias);
 
     public BookDaoImpl() {
         this(new TableDefinition(Table.BOOK.table(), "id"), new BookMapper());

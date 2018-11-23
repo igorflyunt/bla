@@ -9,6 +9,6 @@ public final class ColumnUtil {
     public static String appendAlias(String column, String alias) {
         if (alias.isEmpty())
             return column;
-        return String.format(ALIAS_FORMAT, column, alias);
+        return String.format(ALIAS_FORMAT, alias, column);
     }
 }

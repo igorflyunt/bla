@@ -36,3 +36,6 @@ tmp/
 *~.nib
 local.properties
 .loadpath
+
+# custom
+MainTest.java
