@@ -1,14 +1,11 @@
 package com.softserve.librarymanager.dao.impl;
 
 import com.softserve.librarymanager.dao.BookDao;
-import com.softserve.librarymanager.dao.table.AuthorBookColumns;
-import com.softserve.librarymanager.dao.table.AuthorColumns;
-import com.softserve.librarymanager.dao.table.BookColumns;
+import com.softserve.librarymanager.dao.Dao;
+import com.softserve.librarymanager.dao.mapper.BookMapper;
 import com.softserve.librarymanager.dao.table.Table;
-import com.softserve.librarymanager.dao.table.util.ColumnUtil;
-import com.softserve.librarymanager.dao.util.QueryUtil;
-import com.softserve.librarymanager.db.ParameterizedStatement;
-import com.softserve.librarymanager.db.builder.SelectQueryBuilder;
+import com.softserve.librarymanager.dao.table.TableDefinition;
+import com.softserve.librarymanager.db.DataSource;
 import com.softserve.librarymanager.model.Book;
 
 import java.sql.PreparedStatement;
@@ -17,116 +14,65 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookDaoImpl implements BookDao {
-    private static final String INSERT_BOOK_QUERY = "insert into book (name, description, first_published)" +
+public class BookDaoImpl extends GenericCRUD<Book> implements BookDao, Dao<Book> {
+    private final String bookAlias = Table.BOOK.alias();
+    private final String authorAlias = Table.AUTHOR_BOOK.alias();
+
+    private static final String SQL_INSERT_BOOK = "insert into book (name, description, first_published)" +
             " values (:name, :description, :first_published)";
-    private static final String DELETE_BOOK_BY_ID_QUERY = "delete from book where id = :id";
-    private static final String UPDATE_BOOK_QUERY = "update book" +
+    private static final String SQL_UPDATE_BOOK = "update book" +
             " set name = :name," +
             " description = :description," +
             " first_published = :first_published where id = :id";
 
-    private static final String SELECT_ALL_BOOKS = "select * from book";
-    private static final String SELECT_ALL_BOOKS_BY_AUTHOR_ID;
+    private static final String SQL_SELECT_BOOKS_BY_AUTHOR_ID = String.format("select %s.* from book %s" +
+            " inner join author_book %s" +
+            " on %s.id = %s.book_id" +
+            " where %s.author_id = ?",
+            Table.BOOK.alias(), Table.BOOK.alias(), Table.AUTHOR_BOOK.alias(), Table.AUTHOR.alias(),
+            Table.AUTHOR_BOOK.alias(), Table.AUTHOR_BOOK.alias());
 
-    static {
-        SELECT_ALL_BOOKS_BY_AUTHOR_ID = new SelectQueryBuilder().select().addColumn(BookColumns.ALL.alias())
-                .from(Table.GENRE.aliasedTable()).innerJoin(Table.AUTHOR_BOOK.aliasedTable())
-                .on(BookColumns.ID.alias(), AuthorBookColumns.BOOK_ID.alias())
-                .where().equal(AuthorColumns.ID.alias(), AuthorColumns.ID.aliasedParam()).buildQuery();
+    public BookDaoImpl() {
+        this(new TableDefinition(Table.BOOK.table(), "id"), new BookMapper());
     }
 
-    private ParameterizedStatement parameterizedStatement;
-
-    @Override
-    public void saveOrUpdate(Book book) {
-        try {
-            String updateOrSaveQuery = INSERT_BOOK_QUERY;
-            if (QueryUtil.entityExists(book)) {
-                updateOrSaveQuery = UPDATE_BOOK_QUERY;
-            }
-            parameterizedStatement = new ParameterizedStatement(updateOrSaveQuery);
-            parameterizedStatement.setString(BookColumns.NAME.param(), book.getBookName());
-            parameterizedStatement.setString(BookColumns.DESCRIPTION.param(), book.getDescription());
-            parameterizedStatement.setDate(BookColumns.FIRST_PUBLISHED.param(), book.getFirstPublished());
-            parameterizedStatement.setInt(BookColumns.ID.param(), book.getId());
-            PreparedStatement st = parameterizedStatement.getPreparedStatement();
-            st.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    private BookDaoImpl(TableDefinition tableDefinition, BookMapper entityMapper) {
+        super(tableDefinition, entityMapper);
     }
 
-    @Override
-    public void deleteById(int id) {
-        try {
-            parameterizedStatement = new ParameterizedStatement(DELETE_BOOK_BY_ID_QUERY);
-            parameterizedStatement.setInt(BookColumns.ID.param(), id);
-            parameterizedStatement.getPreparedStatement().executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
-    public Book findById(int id) {
-        Book book = null;
-        try {
-            parameterizedStatement = new ParameterizedStatement("select * from book where id = :id");
-            parameterizedStatement.setInt(BookColumns.ID.param(), id);
-            ResultSet resultSet = parameterizedStatement.getPreparedStatement().executeQuery();
-            resultSet.next();
-            book = toBook(resultSet, Table.NO_TABLE.alias());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return book;
-    }
-
-    @Override
-    public List<Book> findAll() {
+    public List<Book> findAllBooksByAuthorId(int authorId) {
         List<Book> books = new ArrayList<>();
         try {
-            parameterizedStatement = new ParameterizedStatement(SELECT_ALL_BOOKS);
-            ResultSet resultSet = parameterizedStatement.getPreparedStatement().executeQuery();
+            PreparedStatement st = DataSource.getDbConnection().prepareStatement(SQL_SELECT_BOOKS_BY_AUTHOR_ID);
+            st.setInt(1, authorId);
+            ResultSet resultSet = st.executeQuery();
             while (resultSet.next()) {
-                Book book = toBook(resultSet, Table.NO_TABLE.alias());
+                Book book = new BookMapper().mapToEntity(resultSet, Table.BOOK.alias());
                 books.add(book);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return books;
-    }
-
-    @Override
-    public List<Book> findAllBooksByAuthorId(int bookId) {
-        List<Book> books = new ArrayList<>();
-        try {
-            parameterizedStatement = new ParameterizedStatement(SELECT_ALL_BOOKS_BY_AUTHOR_ID);
-            parameterizedStatement.setInt(AuthorColumns.ID.aliasedParam(), bookId);
-            ResultSet resultSet = parameterizedStatement.getPreparedStatement().executeQuery();
-            while (resultSet.next()) {
-                Book book = toBook(resultSet, Table.GENRE.alias());
-                books.add(book);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return books;
     }
 
-    private static Book toBook(ResultSet resultSet, String columnAlias) throws SQLException {
-        Book book = new Book();
-        String id = ColumnUtil.createColumnWithAlias(BookColumns.ID.field(), columnAlias);
-        String name = ColumnUtil.createColumnWithAlias(BookColumns.NAME.field(), columnAlias);
-        String description = ColumnUtil.createColumnWithAlias(BookColumns.DESCRIPTION.field(), columnAlias);
-        String firstPublished = ColumnUtil.createColumnWithAlias(BookColumns.FIRST_PUBLISHED.field(), columnAlias);
-        book.setId(resultSet.getInt(id));
-        book.setBookName(resultSet.getString(name));
-        book.setDescription(resultSet.getString(description));
-        book.setFirstPublished(resultSet.getDate(firstPublished));
-        return book;
+    @Override
+    public Book save(Book entity) {
+        try {
+            Book book = findById(entity.getId());
+            if (book == null) {
+                save(entity, SQL_INSERT_BOOK, entity.getName(), entity.getDescription(),
+                        entity.getFirstPublished());
+            } else {
+                save(entity, SQL_UPDATE_BOOK, entity.getName(), entity.getDescription(),
+                        entity.getFirstPublished(), entity.getId());
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return entity;
     }
 }

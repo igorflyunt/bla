@@ -4,14 +4,7 @@ import com.softserve.librarymanager.model.Book;
 
 import java.util.List;
 
-public interface BookDao {
-    void saveOrUpdate(Book book);
-
-    void deleteById(int id);
-
-    Book findById(int id);
-
-    List<Book> findAll();
+public interface BookDao extends Dao<Book> {
 
     List<Book> findAllBooksByAuthorId(int bookId);
 }

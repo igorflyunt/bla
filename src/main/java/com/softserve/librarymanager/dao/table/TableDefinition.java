@@ -1,19 +1,19 @@
 package com.softserve.librarymanager.dao.table;
 
-public class TableDefinition <T extends Enum<Table>, C extends Enum<C> & Column> {
-    private T table;
-    private Enum<C>[] columns;
+public class TableDefinition {
+    private String table;
+    private String idColumn;
 
-    public TableDefinition(T table, Enum<C>[] columns) {
+    public TableDefinition(String table, String idColumn) {
         this.table = table;
-        this.columns = columns;
+        this.idColumn = idColumn;
     }
 
-    public T getTable() {
+    public String getTable() {
         return table;
     }
 
-    public Enum<C>[] getColumns() {
-        return columns;
+    public String getIdColumn() {
+        return idColumn;
     }
 }

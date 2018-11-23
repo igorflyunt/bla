@@ -11,7 +11,7 @@ public class Book extends AbstractEntity {
 
     public Book() { }
 
-    public String getBookName() {
+    public String getName() {
         return bookName;
     }
 

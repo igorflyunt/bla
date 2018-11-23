@@ -1,14 +1,14 @@
 package com.softserve.librarymanager.dao.table.util;
 
-import com.softserve.librarymanager.dao.table.ColumnFormat;
-
 public final class ColumnUtil {
+    private static final String ALIAS_FORMAT = "%s.%s";
 
-    private ColumnUtil() { }
+    private ColumnUtil() {
+    }
 
-    public static String createColumnWithAlias(String column, String alias) {
+    public static String appendAlias(String column, String alias) {
         if (alias.isEmpty())
             return column;
-        return String.format(ColumnFormat.ALIAS, column, alias);
+        return String.format(ALIAS_FORMAT, column, alias);
     }
 }
