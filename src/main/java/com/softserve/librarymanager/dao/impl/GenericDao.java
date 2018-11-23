@@ -65,7 +65,7 @@ public abstract class GenericDao<E extends AbstractEntity> implements Dao<E> {
             }
             st.executeUpdate();
             ResultSet generatedKeys = st.getGeneratedKeys();
-            if (generatedKeys.next())
+            if (generatedKeys.next() && entity != null)
                 entity.setId(generatedKeys.getInt(1));
         } catch (SQLException e) {
             throw new RuntimeException(e);
