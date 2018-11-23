@@ -36,7 +36,6 @@ public class BookDaoImpl extends GenericDao<Book> implements BookDao, Dao<Book> 
         super(tableDefinition, entityMapper);
     }
 
-
     @Override
     public List<Book> findAllBooksByAuthorId(int authorId) {
         return query(SQL_SELECT_BOOKS_BY_AUTHOR_ID, new BookMapper(bookAlias), authorId);
@@ -44,7 +43,7 @@ public class BookDaoImpl extends GenericDao<Book> implements BookDao, Dao<Book> 
 
     @Override
     public void save(Book entity) {
-        if (entityExists(entity.getId())) {
+        if (entityExists(entity)) {
             save(entity, SQL_INSERT_BOOK, entity.getName(), entity.getDescription(),
                     entity.getFirstPublished());
         } else {

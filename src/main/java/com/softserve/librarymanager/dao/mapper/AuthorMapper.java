@@ -1,7 +1,5 @@
 package com.softserve.librarymanager.dao.mapper;
 
-import com.softserve.librarymanager.dao.table.column.AuthorColumns;
-import com.softserve.librarymanager.dao.table.util.ColumnUtil;
 import com.softserve.librarymanager.model.Author;
 
 import java.sql.ResultSet;
