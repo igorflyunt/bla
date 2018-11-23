@@ -1,6 +1,7 @@
 package com.softserve.librarymanager.dao;
 
 import com.softserve.librarymanager.model.Author;
+import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.model.Genre;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface GenreDao extends Dao<Genre> {
     List<Genre> findGenresByAuthorId(int authorId);
 
     void saveAuthorGenre(Genre genre, Author author);
+
+    void saveBookGenre(Genre genre, Book book);
 }

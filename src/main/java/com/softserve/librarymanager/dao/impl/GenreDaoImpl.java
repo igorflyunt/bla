@@ -8,6 +8,7 @@ import com.softserve.librarymanager.dao.table.Table;
 import com.softserve.librarymanager.dao.table.TableDefinition;
 import com.softserve.librarymanager.dao.table.column.GenreColumns;
 import com.softserve.librarymanager.model.Author;
+import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.model.Genre;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public class GenreDaoImpl extends GenericDao<Genre> implements GenreDao, Dao<Gen
 
     private static final String SQL_INSERT_GENRE = "insert into genre (name) values(?)";
     private static final String SQL_INSERT_GENRE_INTO_AUTHOR = "insert into genre_author (genre_id, author_id)" +
+            " values(?, ?)";
+    private static final String SQL_INSERT_GENRE_INTO_BOOK = "insert into genre_book (genre_id, book_id)" +
             " values(?, ?)";
     private static final String SQL_UPDATE_GENRE = "update genre set name = ? where id = ?";
     private static final String SQL_SELECT_GENRES_BY_AUTHOR_ID = String.format(
@@ -55,6 +58,11 @@ public class GenreDaoImpl extends GenericDao<Genre> implements GenreDao, Dao<Gen
     @Override
     public void saveAuthorGenre(Genre genre, Author author) {
         save(null, SQL_INSERT_GENRE_INTO_AUTHOR, genre.getId(), author.getId());
+    }
+
+    @Override
+    public void saveBookGenre(Genre genre, Book book) {
+        save(null, SQL_INSERT_GENRE_INTO_BOOK, genre.getId(), book.getId());
     }
 
     @Override
