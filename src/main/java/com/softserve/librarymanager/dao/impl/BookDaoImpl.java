@@ -5,6 +5,7 @@ import com.softserve.librarymanager.dao.Dao;
 import com.softserve.librarymanager.dao.mapper.BookMapper;
 import com.softserve.librarymanager.dao.table.Table;
 import com.softserve.librarymanager.dao.table.TableDefinition;
+import com.softserve.librarymanager.dao.table.column.BookColumns;
 import com.softserve.librarymanager.db.DataSource;
 import com.softserve.librarymanager.model.Book;
 
@@ -25,14 +26,15 @@ public class BookDaoImpl extends GenericCRUD<Book> implements BookDao, Dao<Book>
             " first_published = ?" +
             " where id = ?";
 
-    private static final String SQL_SELECT_BOOKS_BY_AUTHOR_ID = String.format("select %s.* from book %s" +
+    private static final String SQL_SELECT_BOOKS_BY_AUTHOR_ID = String.format(
+            "select %s.* from book %s" +
             " inner join author_book %s" +
             " on %s.id = %s.book_id" +
             " where %s.author_id = ?",
             bookAlias, bookAlias, authorAlias, bookAlias, authorAlias, authorAlias);
 
     public BookDaoImpl() {
-        this(new TableDefinition(Table.BOOK.table(), "id"), new BookMapper());
+        this(new TableDefinition(Table.BOOK.table(), BookColumns.ID), new BookMapper());
     }
 
     private BookDaoImpl(TableDefinition tableDefinition, BookMapper entityMapper) {
@@ -48,7 +50,7 @@ public class BookDaoImpl extends GenericCRUD<Book> implements BookDao, Dao<Book>
             st.setInt(1, authorId);
             ResultSet resultSet = st.executeQuery();
             while (resultSet.next()) {
-                Book book = new BookMapper().mapToEntity(resultSet, Table.BOOK.alias());
+                Book book = new BookMapper().mapToEntity(resultSet, bookAlias);
                 books.add(book);
             }
         } catch (SQLException e) {
@@ -59,19 +61,14 @@ public class BookDaoImpl extends GenericCRUD<Book> implements BookDao, Dao<Book>
     }
 
     @Override
-    public Book save(Book entity) {
-        try {
-            Book book = findById(entity.getId());
-            if (book == null) {
-                save(entity, SQL_INSERT_BOOK, entity.getName(), entity.getDescription(),
-                        entity.getFirstPublished());
-            } else {
-                save(entity, SQL_UPDATE_BOOK, entity.getName(), entity.getDescription(),
-                        entity.getFirstPublished(), entity.getId());
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+    public void save(Book entity) {
+        Book book = findById(entity.getId());
+        if (book == null) {
+            save(entity, SQL_INSERT_BOOK, entity.getName(), entity.getDescription(),
+                    entity.getFirstPublished());
+        } else {
+            save(entity, SQL_UPDATE_BOOK, entity.getName(), entity.getDescription(),
+                    entity.getFirstPublished(), entity.getId());
         }
-        return entity;
     }
 }

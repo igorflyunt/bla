@@ -28,4 +28,9 @@ public enum Table {
     public String alias() {
         return this.tableAlias;
     }
+
+    @Override
+    public String toString() {
+        return this.name().toLowerCase();
+    }
 }

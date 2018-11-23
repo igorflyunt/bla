@@ -5,17 +5,18 @@ import com.softserve.librarymanager.model.Book;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static com.softserve.librarymanager.dao.table.util.ColumnUtil.appendAlias;
+import static com.softserve.librarymanager.dao.table.column.BookColumns.*;
+import static com.softserve.librarymanager.dao.table.util.ColumnUtil.addAliasIfProvided;
 
 public class BookMapper implements EntityMapper<Book> {
 
     @Override
     public Book mapToEntity(ResultSet resultSet, String columnAlias) throws SQLException {
         Book book = new Book();
-        book.setId(resultSet.getInt(appendAlias("id", columnAlias)));
-        book.setBookName(resultSet.getString(appendAlias("name", columnAlias)));
-        book.setDescription(resultSet.getString(appendAlias("description", columnAlias)));
-        book.setFirstPublished(resultSet.getDate(appendAlias("first_published", columnAlias)));
+        book.setId(resultSet.getInt(addAliasIfProvided(ID, columnAlias)));
+        book.setBookName(resultSet.getString(addAliasIfProvided(NAME, columnAlias)));
+        book.setDescription(resultSet.getString(addAliasIfProvided(DESCRIPTION, columnAlias)));
+        book.setFirstPublished(resultSet.getDate(addAliasIfProvided(FIRST_PUBLISHED, columnAlias)));
         return book;
     }
 }
