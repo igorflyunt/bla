@@ -1,13 +1,15 @@
 package com.softserve.librarymanager.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface Dao<E> {
-    List<E> findAll() ;
+    List<E> findAll();
 
-    E findById(int id) ;
+    Optional<E> findById(int id);
 
     void save(E entity);
 
-    void delete(E entity) ;
+    void delete(E entity);
+
 }

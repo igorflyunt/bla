@@ -9,16 +9,14 @@ import com.softserve.librarymanager.model.AbstractEntity;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public abstract class GenericCRUD<E extends AbstractEntity> implements Dao<E> {
-    private static final String NO_ALIAS = "";
-
+public abstract class GenericDao<E extends AbstractEntity> implements Dao<E> {
     private Connection connection = DataSource.getDbConnection();
-
     private EntityMapper<E> entityMapper;
     private TableDefinition tableDefinition;
 
-    protected GenericCRUD(TableDefinition tableDefinition, EntityMapper<E> entityMapper) {
+    protected GenericDao(TableDefinition tableDefinition, EntityMapper<E> entityMapper) {
         this.tableDefinition = tableDefinition;
         this.entityMapper = entityMapper;
     }
@@ -30,7 +28,7 @@ public abstract class GenericCRUD<E extends AbstractEntity> implements Dao<E> {
         try {
             ResultSet resultSet = connection.prepareStatement(query).executeQuery();
             while (resultSet.next()) {
-                entities.add(entityMapper.mapToEntity(resultSet, NO_ALIAS));
+                entities.add(entityMapper.mapToEntity(resultSet));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -40,7 +38,7 @@ public abstract class GenericCRUD<E extends AbstractEntity> implements Dao<E> {
     }
 
     @Override
-    public E findById(int id) {
+    public Optional<E> findById(int id) {
         String query = String.format("select * from %s where %s = ?", tableDefinition.getTable(),
                 tableDefinition.getIdColumn());
         E entity = null;
@@ -49,13 +47,13 @@ public abstract class GenericCRUD<E extends AbstractEntity> implements Dao<E> {
             st.setInt(1, id);
             ResultSet resultSet = st.executeQuery();
             if (resultSet.next()) {
-                  entity = entityMapper.mapToEntity(resultSet, NO_ALIAS);
+                  entity = entityMapper.mapToEntity(resultSet);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         System.out.println(query);
-        return entity;
+        return Optional.ofNullable(entity);
     }
 
     protected void save(E entity, String query, Object... paramArgs) {
@@ -73,6 +71,28 @@ public abstract class GenericCRUD<E extends AbstractEntity> implements Dao<E> {
             throw new RuntimeException(e);
         }
         System.out.println(query);
+    }
+
+    protected boolean doesEntityExists(int id) {
+        return findById(id).isPresent();
+    }
+
+    protected List<E> query(String query, EntityMapper<E> entityMapper, Object... paramArgs) {
+        List<E> entities = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(query);
+            for (int i = 0; i < paramArgs.length; i++) {
+                Object paramArg = paramArgs[i];
+                st.setObject(i + 1, paramArg);
+            }
+            ResultSet resultSet = st.executeQuery();
+            while (resultSet.next()) {
+                entities.add(entityMapper.mapToEntity(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return entities;
     }
 
     @Override

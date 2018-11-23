@@ -8,10 +8,18 @@ import java.sql.SQLException;
 import static com.softserve.librarymanager.dao.table.column.BookColumns.*;
 import static com.softserve.librarymanager.dao.table.util.ColumnUtil.addAliasIfProvided;
 
-public class BookMapper implements EntityMapper<Book> {
+public class BookMapper extends AbstractMapper<Book> implements EntityMapper<Book> {
+
+    public BookMapper() {
+        super();
+    }
+
+    public BookMapper(String columnAlias) {
+        super(columnAlias);
+    }
 
     @Override
-    public Book mapToEntity(ResultSet resultSet, String columnAlias) throws SQLException {
+    public Book mapToEntity(ResultSet resultSet) throws SQLException {
         Book book = new Book();
         book.setId(resultSet.getInt(addAliasIfProvided(ID, columnAlias)));
         book.setBookName(resultSet.getString(addAliasIfProvided(NAME, columnAlias)));
