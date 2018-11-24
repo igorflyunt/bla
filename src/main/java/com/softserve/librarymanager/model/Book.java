@@ -40,8 +40,8 @@ public class Book extends AbstractEntity {
         this.firstPublished = firstPublished;
     }
 
-    public void addGenre(Genre genre) {
-        this.genres.add(genre);
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
     }
 
     public void setAuthors(List<Author> authors) {
@@ -51,6 +51,8 @@ public class Book extends AbstractEntity {
     public List<Author> getAuthors() {
         return authors;
     }
+
+
 
     @Override
     public String toString() {

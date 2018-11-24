@@ -13,24 +13,41 @@ body {
     padding-top: 56px;
   }
 }
-.row {
-  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh; /* These two lines are counted as one :-)       */
 
-  display: flex;
-  align-items: baseline;
-}
-
-.card-body {
-  width: auto;
-  height: auto;
-}
-
-.list-group-item {
-
-  word-wrap: break-word;
-}
 .book-cover-list {
   width: 50px;
   height: 75px;
+}
+
+.book-cover {
+    width: 150px;
+    height: 229px;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 4%;
+    width: 100%;
+}
+
+footer > .container {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.book-description {
+    word-wrap: break-word;
+}
+
+.book-details {
+    width: 50%;
+}
+
+a {
+    text-decoration: none !important;
+    color: black;
 }

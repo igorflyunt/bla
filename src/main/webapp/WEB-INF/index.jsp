@@ -7,18 +7,18 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-2 mx-0">
-            <div class="list-group">
+            <div class="list-group text-center">
                 <a href="#" class="list-group-item my-2">All</a>
                 <a href="#" class="list-group-item my-2">Currently reading</a>
                 <a href="#" class="list-group-item my-2">Read</a>
                 <a href="#" class="list-group-item my-2">To-Read</a>
             </div>
         </div>
-        <div class="col-lg-6 mx-auto">
+        <div class="col-lg-5 mx-auto">
             <h3 class="text-left"> ${indexPageName}</h3>
             <ul class="list-unstyled">
                 <c:forEach items="${books}" var="book">
-                    <li class="media my-4 mx-auto">
+                    <li class="media py-2 my-4 mx-0 border-top">
                         <img class="book-cover-list media-object mr-3" src="https://images-na.ssl-images-amazon.com/images/I/51K84pomCRL._SX305_BO1,204,203,200_.jpg" alt="...">
                         <div class="media-body">
                             <h5 class="mt-0 mb-1"><a class="custom-link" href="/book?bookid=${book.id}">${book.name}</a></h5>
@@ -30,7 +30,7 @@
                             </c:forEach>
                         </div>
                         <div class="media-body">
-                            <div class="btn-group ml-0">
+                            <div class="btn-group">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Want to read
                                 </button>
@@ -50,7 +50,6 @@
             </div>
         </div>
     </div>
-</div>
 <jsp:include page="layout/footer.jsp"/>
 </body>
 </html>
