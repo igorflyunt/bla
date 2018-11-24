@@ -1,8 +1,7 @@
 package com.softserve.librarymanager.servlet;
 
-import com.softserve.librarymanager.dao.BookDao;
-import com.softserve.librarymanager.dao.impl.BookDaoImpl;
 import com.softserve.librarymanager.model.Book;
+import com.softserve.librarymanager.service.BookService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,14 +13,15 @@ import java.util.List;
 
 @WebServlet("")
 public class LatestBooksView extends HttpServlet {
-    private BookDao bookDao = new BookDaoImpl();
+    private BookService bookService = new BookService();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Book> tenLatestBooks = bookDao.findTenLatestBooks();
+        List<Book> tenLatestBooks = bookService.findTenLatestBooks();
         request.setAttribute("books", tenLatestBooks);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.setAttribute("indexPageName", "Latest Books");
+        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
 }

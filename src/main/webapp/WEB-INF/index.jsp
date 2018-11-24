@@ -1,9 +1,9 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 <html>
-<jsp:include page="WEB-INF/layout/header.jsp"/>
+<jsp:include page="layout/header.jsp"/>
 <body>
-<jsp:include page="WEB-INF/layout/navbar.jsp"/>
+<jsp:include page="layout/navbar.jsp"/>
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-2 mx-0">
@@ -14,8 +14,8 @@
                 <a href="#" class="list-group-item my-2">To-Read</a>
             </div>
         </div>
-
         <div class="col-lg-6 mx-auto">
+            <h3 class="text-left"> ${indexPageName}</h3>
             <ul class="list-unstyled">
                 <c:forEach items="${books}" var="book">
                     <li class="media my-4 mx-auto">
@@ -51,6 +51,6 @@
         </div>
     </div>
 </div>
-<jsp:include page="WEB-INF/layout/footer.jsp"/>
+<jsp:include page="layout/footer.jsp"/>
 </body>
 </html>

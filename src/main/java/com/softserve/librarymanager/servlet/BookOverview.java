@@ -36,6 +36,7 @@ public class BookOverview extends HttpServlet {
             book.setAuthors(authorDao.findAllAuthorsByBookId(book.getId()));
         }
         request.setAttribute("books", books);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.setAttribute("indexPageName", "All books");
+        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
 }

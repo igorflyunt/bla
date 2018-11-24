@@ -29,7 +29,7 @@ public class BookDaoImpl extends GenericDao<Book> implements BookDao, Dao<Book> 
             " on %s.id = %s.book_id" +
             " where %s.author_id = ?",
             bookAlias, bookAlias, authorAlias, bookAlias, authorAlias, authorAlias);
-    private static final String SQL_SELECT_TEN_LATEST_BOOKS = "select * from book order by first_published desc limit 10";
+    private static final String SQL_SELECT_TEN_LATEST_BOOKS = "select * from book order by first_published desc limit 2";
 
     public BookDaoImpl() {
         this(new TableDefinition(Table.BOOK.table(), BookColumns.ID), new BookMapper());
