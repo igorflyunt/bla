@@ -21,9 +21,9 @@
                     <li class="media my-4 mx-auto">
                         <img class="book-cover-list media-object mr-3" src="https://images-na.ssl-images-amazon.com/images/I/51K84pomCRL._SX305_BO1,204,203,200_.jpg" alt="...">
                         <div class="media-body">
-                            <h5 class="mt-0 mb-1">${book.name}</h5>
+                            <h5 class="mt-0 mb-1"><a href="/book?bookid=${book.id}">${book.name}</a></h5>
                             <c:forEach items="${book.authors}" var="author">
-                                <small>${author.firstName} ${author.lastName}  </small>
+                                <small><a href="/author?authorid=${author.id}">${author.firstName} ${author.lastName}</a></small>
                             </c:forEach>
                         </div>
                         <div class="media-body">
