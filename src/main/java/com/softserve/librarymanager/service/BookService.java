@@ -9,7 +9,6 @@ import com.softserve.librarymanager.dao.impl.GenreDaoImpl;
 import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.model.Genre;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
