@@ -9,5 +9,7 @@ public interface BookDao extends Dao<Book> {
 
     List<Book> findAllBooksByAuthorId(int bookId);
 
+    List<Book> findTenLatestBooks();
+
     void saveBookAuthor(Author author, Book book);
 }

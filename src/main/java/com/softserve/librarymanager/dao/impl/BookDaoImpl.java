@@ -23,13 +23,13 @@ public class BookDaoImpl extends GenericDao<Book> implements BookDao, Dao<Book> 
             " set name = ?, description = ?," +
             " first_published = ?" +
             " where id = ?";
-
     private static final String SQL_SELECT_BOOKS_BY_AUTHOR_ID = String.format(
             "select %s.* from book %s" +
             " inner join author_book %s" +
             " on %s.id = %s.book_id" +
             " where %s.author_id = ?",
             bookAlias, bookAlias, authorAlias, bookAlias, authorAlias, authorAlias);
+    private static final String SQL_SELECT_TEN_LATEST_BOOKS = "select * from book order by first_published desc limit 10";
 
     public BookDaoImpl() {
         this(new TableDefinition(Table.BOOK.table(), BookColumns.ID), new BookMapper());
@@ -42,6 +42,11 @@ public class BookDaoImpl extends GenericDao<Book> implements BookDao, Dao<Book> 
     @Override
     public List<Book> findAllBooksByAuthorId(int authorId) {
         return query(SQL_SELECT_BOOKS_BY_AUTHOR_ID, new BookMapper(bookAlias), authorId);
+    }
+
+    @Override
+    public List<Book> findTenLatestBooks() {
+        return query(SQL_SELECT_TEN_LATEST_BOOKS, new BookMapper());
     }
 
     @Override
