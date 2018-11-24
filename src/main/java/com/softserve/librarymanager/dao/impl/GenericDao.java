@@ -40,7 +40,7 @@ public abstract class GenericDao<E extends AbstractEntity> implements Dao<E> {
     @Override
     public Optional<E> findById(int id) {
         String query = String.format("select * from %s where %s = ?", tableDefinition.getTable(),
-                tableDefinition.getIdColumn());
+                tableDefinition.getTablePrimaryKey());
         E entity = null;
         try {
             PreparedStatement st = connection.prepareStatement(query);
@@ -98,7 +98,7 @@ public abstract class GenericDao<E extends AbstractEntity> implements Dao<E> {
     @Override
     public void delete(E entity) {
         String query = String.format("delete from %s where %s = ?", tableDefinition.getTable(),
-                tableDefinition.getIdColumn());
+                tableDefinition.getTablePrimaryKey());
         try {
             PreparedStatement st = connection.prepareStatement(query);
             st.setInt(1, entity.getId());

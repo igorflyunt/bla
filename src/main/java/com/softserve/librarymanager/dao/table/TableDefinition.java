@@ -2,18 +2,18 @@ package com.softserve.librarymanager.dao.table;
 
 public class TableDefinition {
     private String table;
-    private String idColumn;
+    private String tablePrimaryKey;
 
-    public TableDefinition(String table, String idColumn) {
+    public TableDefinition(String table, String tablePrimaryKey) {
         this.table = table;
-        this.idColumn = idColumn;
+        this.tablePrimaryKey = tablePrimaryKey;
     }
 
     public String getTable() {
         return table;
     }
 
-    public String getIdColumn() {
-        return idColumn;
+    public String getTablePrimaryKey() {
+        return tablePrimaryKey;
     }
 }
