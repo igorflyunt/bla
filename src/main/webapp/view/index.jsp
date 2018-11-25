@@ -1,9 +1,9 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 <html>
-<jsp:include page="layout/header.jsp"/>
+<jsp:include page="../layout/header.jsp"/>
 <body>
-<jsp:include page="layout/navbar.jsp"/>
+<jsp:include page="../layout/navbar.jsp"/>
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-4 ">
@@ -50,6 +50,6 @@
             </div>
         </div>
     </div>
-<jsp:include page="layout/footer.jsp"/>
+<jsp:include page="../layout/footer.jsp"/>
 </body>
 </html>

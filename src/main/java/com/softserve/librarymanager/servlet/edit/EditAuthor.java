@@ -1,4 +1,4 @@
-package com.softserve.librarymanager.servlet.admin;
+package com.softserve.librarymanager.servlet.edit;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/admin/book")
-public class EditBook extends HttpServlet {
+@WebServlet(urlPatterns={"/admin/author"})
+public class EditAuthor extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {
@@ -17,16 +17,7 @@ public class EditBook extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-    }
-
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPut(req, resp);
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
+        System.out.println("asdfsadfsdfsdafsdafsa");
+        request.getRequestDispatcher("/view/admin/AuthorViewAdmin.jsp").forward(request, response);
     }
 }

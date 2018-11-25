@@ -22,6 +22,6 @@ public class LatestBooksView extends HttpServlet {
         List<Book> tenLatestBooks = bookService.findTenLatestBooks();
         request.setAttribute("books", tenLatestBooks);
         request.setAttribute("indexPageName", "Latest Books");
-        request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/index.jsp").forward(request, response);
     }
 }
