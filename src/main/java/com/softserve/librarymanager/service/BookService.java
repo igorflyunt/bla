@@ -22,6 +22,12 @@ public class BookService {
         return books;
     }
 
+    public List<Book> findAllBooksByAuthorId(int authorId) {
+        List<Book> books = bookDao.findAllBooksByAuthorId(authorId);
+        books.forEach(this::initBookEagerly);
+        return books;
+    }
+
     public List<Book> findTenLatestBooks() {
         List<Book> books = bookDao.findTenLatestBooks();
         books.forEach(this::initBookEagerly);
