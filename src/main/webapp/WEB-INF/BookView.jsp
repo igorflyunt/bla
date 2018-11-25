@@ -32,7 +32,7 @@
                             by
                             <c:forEach items="${book.authors}" var="author" varStatus="loop">
                                 <small>
-                                    <a class="custom-link" href="/author?authorid=${author.id}">${author.firstName} ${author.lastName}
+                                    <a class="custom-link" href="/author?authorId=${author.id}">${author.firstName} ${author.lastName}
                                     </a>${loop.last ? "" : ",  "}
                                 </small>
                             </c:forEach>
