@@ -1,4 +1,4 @@
-package com.softserve.librarymanager.servlet;
+package com.softserve.librarymanager.servlet.admin;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

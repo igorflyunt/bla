@@ -1,4 +1,4 @@
-package com.softserve.librarymanager.servlet;
+package com.softserve.librarymanager.servlet.user;
 
 import com.softserve.librarymanager.model.Author;
 import com.softserve.librarymanager.service.AuthorService;
