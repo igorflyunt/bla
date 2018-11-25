@@ -17,7 +17,6 @@ public class EditAuthor extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("asdfsadfsdfsdafsdafsa");
-        request.getRequestDispatcher("/view/admin/AuthorViewAdmin.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/admin/AuthorEditor.jsp").forward(request, response);
     }
 }

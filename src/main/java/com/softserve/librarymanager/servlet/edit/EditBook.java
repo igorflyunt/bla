@@ -17,7 +17,7 @@ public class EditBook extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/view/admin/BookView.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/admin/BookEditor.jsp").forward(request, response);
     }
 
     @Override
