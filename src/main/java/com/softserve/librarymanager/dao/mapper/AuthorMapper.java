@@ -23,6 +23,7 @@ public class AuthorMapper extends AbstractMapper<Author> implements EntityMapper
         author.setFirstName((resultSet.getString(addAliasIfProvided(FIRST_NAME, columnAlias))));
         author.setLastName((resultSet.getString(addAliasIfProvided(LAST_NAME, columnAlias))));
         author.setBirthDate((resultSet.getDate(addAliasIfProvided(BIRTH_DATE, columnAlias))));
+        author.setBiography((resultSet.getString(addAliasIfProvided("biography", columnAlias))));
         return author;
     }
 }

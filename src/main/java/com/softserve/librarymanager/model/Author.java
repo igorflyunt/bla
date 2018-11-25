@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Author extends Person {
+    private String biography;
     private Date birthDate;
     private List<Book> books = new ArrayList<>();
     private List<Genre> genres = new ArrayList<>();
@@ -33,6 +34,14 @@ public class Author extends Person {
 
     public void setGenres(List<Genre> genres) {
         this.genres = genres;
+    }
+
+    public String getBiography() {
+        return biography;
+    }
+
+    public void setBiography(String biography) {
+        this.biography = biography;
     }
 
     @Override
