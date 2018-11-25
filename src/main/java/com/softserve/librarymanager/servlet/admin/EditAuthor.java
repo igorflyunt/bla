@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "EditAuthor")
+@WebServlet("/admin/author")
 public class EditAuthor extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
