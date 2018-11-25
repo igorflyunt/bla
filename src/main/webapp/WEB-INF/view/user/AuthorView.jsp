@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="row mx-auto">
-        <div class="col-lg-5 mx-auto">
+        <div class="col-lg-4 mx-auto">
             <h3 class="text-left"> ${indexPageName}</h3>
             <ul class="list-unstyled">
                 <c:forEach items="${author.books}" var="book">
@@ -45,7 +45,7 @@
                             </c:forEach>
                         </div>
                         <div class="media-body">
-                            <div class="btn-group">
+                            <div class="btn-group float-right">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Want to read
                                 </button>
