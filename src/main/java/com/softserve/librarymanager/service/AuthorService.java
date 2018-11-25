@@ -6,6 +6,7 @@ import com.softserve.librarymanager.dao.impl.AuthorDaoImpl;
 import com.softserve.librarymanager.dao.impl.GenreDaoImpl;
 import com.softserve.librarymanager.model.Author;
 
+import java.util.List;
 import java.util.Optional;
 
 public class AuthorService {
@@ -13,6 +14,10 @@ public class AuthorService {
     private AuthorDao authorDao = new AuthorDaoImpl();
 
     private GenreDao genreDao = new GenreDaoImpl();
+
+    public List<Author> findAll() {
+        return authorDao.findAll();
+    }
 
     public Optional<Author> findAuthorById(int authorId) {
         return authorDao.findById(authorId).map(this::initAuthorEagerly);
