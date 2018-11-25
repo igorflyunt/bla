@@ -19,6 +19,6 @@ public class BookView extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int bookid = Integer.parseInt(request.getParameter("bookid"));
         bookService.findBookById(bookid).ifPresent(b-> request.setAttribute("book", b));
-        request.getRequestDispatcher("../webapp/WEB-INF/view/user/BookView.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/view/user/BookView.jsp").forward(request, response);
     }
 }
