@@ -23,6 +23,6 @@ public class AuthorView extends HttpServlet {
             throws ServletException, IOException {
         int authorId = Integer.parseInt(request.getParameter("authorId"));
         authorService.findAuthorById(authorId).ifPresent(author -> request.setAttribute("author", author));
-        request.getRequestDispatcher("WEB-INF/AuthorView.jsp").forward(request, response);
+        request.getRequestDispatcher("../webapp/WEB-INF/view/user/AuthorView.jsp").forward(request, response);
     }
 }

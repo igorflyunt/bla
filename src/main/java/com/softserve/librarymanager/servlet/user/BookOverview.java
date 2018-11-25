@@ -25,6 +25,6 @@ public class BookOverview extends HttpServlet {
         List<Book> books = bookService.findAllBooks();
         request.setAttribute("books", books);
         request.setAttribute("indexPageName", "All books");
-        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
     }
 }
