@@ -13,7 +13,7 @@
                         <img src="https://via.placeholder.com/150" alt="...">
                     </div>
                     <div class="media-body text-left">
-                        <h5 class="mt-0 mb-1 border-top">${author.firstName} ${author.lastName}</h5>
+                        <h5 class="mt-0 mb-1 border-bottom">${author.firstName} ${author.lastName}</h5>
                         <p>${author.birthDate}</p>
                         <p>
                             <c:forEach items="${author.genres}" var="genre">
@@ -22,7 +22,7 @@
                         </p>
                         <p class="book-description">
                             ${author.biography}
-                        </p> <
+                        </p>
                     </div>
                 </li>
             </ul>
