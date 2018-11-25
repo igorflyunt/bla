@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BookDao extends Dao<Book> {
 
-    List<Book> findAllBooksByAuthorId(int bookId);
+    List<Book> findAllBooksByAuthorId(int authorId);
 
     List<Book> findTenLatestBooks();
 
