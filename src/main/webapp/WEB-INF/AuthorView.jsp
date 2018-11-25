@@ -14,7 +14,7 @@
                     </div>
                     <div class="media-body text-left">
                         <h5 class="mt-0 mb-1 border-top">${author.firstName} ${author.lastName}</h5>
-                        <p>${author.birth_date}</p>
+                        <p>${author.birthDate}</p>
                         <p>
                             <c:forEach items="${author.genres}" var="genre">
                                 <span class="badge badge-light">${genre.genreName}</span>
