@@ -19,17 +19,15 @@
         <div class="row-fluid my-2"><div class="collapse" id="newAuthor"><form>
             <div class="form-group">
                 <label for="formGroupExampleInput">First name:</label>
-                <input type="text" class="form-control" value="${author.firstName}" id="formGroupExampleInput" placeholder="author first name">
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="author first name">
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Last name:</label>
-                <input type="text" class="form-control" value="${author.lastName}" id="formGroupExampleInput2" placeholder="author last name">
+                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="author last name">
             </div>
             <div class="form-group">
                 <label for="descr">Description:</label>
-                <textarea class="form-control" id="descr"  placeholder="author description" rows="7">
-                    ${author.biography}
-                </textarea>
+                <textarea class="form-control" id="descr"  placeholder="author description" rows="7"></textarea>
             </div>
             <div class="form-group">
                 <label for="birth-date">Birth date:</label>
