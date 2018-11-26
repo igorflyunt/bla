@@ -29,7 +29,7 @@ public class EditAuthor extends HttpServlet {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String bio = request.getParameter("biography");
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         Author author = new Author();
         setEntityIdIfExists(request.getParameter("id"), author);

@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: iflyunt
-  Date: 11/26/18
-  Time: 1:51 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="accordion"><c:forEach var="author" items="${authors}">
@@ -25,7 +18,9 @@
                         <button class="btn btn-secondary btn-sm float-right"
                                 type="button" data-toggle="collapse" data-target="#newBook${author.id}"
                                 aria-expanded="false" aria-controls="newBook${author.id}">Add book</button>
-                        <button class="btn btn-secondary btn-sm float-right" type="button">Books</button>
+                        <a href="/admin/book?authorId=${author.id}">
+                            <button class="btn btn-secondary btn-sm float-right" type="button">Books</button>
+                        </a>
                         <button class="btn btn-danger btn-sm float-right" id="deleteAuthor${author.id}" name="authorId"
                                 value="${author.id}"
                                 type="button">

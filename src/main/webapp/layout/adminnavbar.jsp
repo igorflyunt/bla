@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/books">Authors</a>
+                    <a class="nav-link" href="/admin/author">Authors</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/books">Books</a>

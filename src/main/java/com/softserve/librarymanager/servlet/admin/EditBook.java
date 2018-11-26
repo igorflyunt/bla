@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @WebServlet("/admin/book")
 @Singleton
@@ -46,6 +47,9 @@ public class EditBook extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int authorId = Integer.parseInt(request.getParameter("authorId"));
+        List<Book> books = bookService.findBooksByAuthorId(authorId);
+        request.setAttribute("books", books);
         request.getRequestDispatcher("/view/admin/BookEditor.jsp").forward(request, response);
     }
 

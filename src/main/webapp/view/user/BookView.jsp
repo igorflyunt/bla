@@ -29,6 +29,7 @@
                         </div>
                         <div class="media-body text-left">
                             <h5 class="mt-0 mb-1"><a class="custom-link" href="/book?bookid=${book.id}">${book.name}</a></h5>
+                            <p>Publication year: ${book.firstPublished}</p>
                             by
                             <c:forEach items="${book.authors}" var="author" varStatus="loop">
                                 <small>
