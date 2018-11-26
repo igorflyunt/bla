@@ -16,7 +16,7 @@ public class AuthorDaoImpl extends GenericDao<Author> implements AuthorDao, Dao<
     private static final String authorAlias = Table.AUTHOR.alias();
 
     private static final String SQL_INSERT_AUTHOR = "insert into author (first_name, last_name, birth_date, biography)" +
-            "values(?, ?, ?)";
+            "values(?, ?, ?, ?)";
     private static final String SQL_UPDATE_AUTHOR = "update author set first_name = ?, last_name = ?, birth_date = ?,"
                                                     + " biography = ?" + " where id = ?";
     private static final String SQL_SELECT_AUTHORS_BY_BOOK_ID = String.format(
