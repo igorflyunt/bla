@@ -6,7 +6,6 @@ import com.softserve.librarymanager.dao.mapper.BookMapper;
 import com.softserve.librarymanager.dao.table.Table;
 import com.softserve.librarymanager.dao.table.TableDefinition;
 import com.softserve.librarymanager.dao.table.column.BookColumns;
-import com.softserve.librarymanager.model.Author;
 import com.softserve.librarymanager.model.Book;
 
 import java.util.List;
@@ -50,18 +49,18 @@ public class BookDaoImpl extends GenericDao<Book> implements BookDao, Dao<Book> 
     }
 
     @Override
-    public void saveBookAuthor(Author author, Book book) {
-        save(null, SQL_INSERT_BOOK_INTO_AUTHOR, author.getId(), book.getId());
+    public void mapBookToAuthor(int bookId, int authorId) {
+        save(null, SQL_INSERT_BOOK_INTO_AUTHOR, authorId, bookId);
     }
 
     @Override
     public void save(Book entity) {
         if (entityExists(entity)) {
-            save(entity, SQL_INSERT_BOOK, entity.getName(), entity.getDescription(),
-                    entity.getFirstPublished());
-        } else {
             save(entity, SQL_UPDATE_BOOK, entity.getName(), entity.getDescription(),
                     entity.getFirstPublished(), entity.getId());
+        } else {
+            save(entity, SQL_INSERT_BOOK, entity.getName(), entity.getDescription(),
+                    entity.getFirstPublished());
         }
     }
 }

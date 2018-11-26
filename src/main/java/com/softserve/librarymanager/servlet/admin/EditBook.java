@@ -1,6 +1,10 @@
 package com.softserve.librarymanager.servlet.admin;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.softserve.librarymanager.model.Book;
+import com.softserve.librarymanager.service.AuthorService;
+import com.softserve.librarymanager.service.BookService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +16,22 @@ import java.io.IOException;
 @WebServlet("/admin/book")
 @Singleton
 public class EditBook extends HttpServlet {
-    protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response)
-            throws ServletException, IOException {
-        System.out.println(request.getParameter("authorId"));
+    @Inject
+    private AuthorService authorService;
+
+    @Inject
+    private BookService bookService;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int authorId = Integer.parseInt(request.getParameter("authorId"));
+        String bookName = request.getParameter("bookName");
+        String bookDescription = request.getParameter("bookDescription");
+        Book book = new Book();
+        book.setBookName(bookName);
+        book.setDescription(bookDescription);
+        bookService.save(book);
+        bookService.mapBookToAuthor(book.getId(), authorId);
+        response.sendRedirect("/admin/author");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -25,7 +41,7 @@ public class EditBook extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPut(req, resp);
+
     }
 
     @Override

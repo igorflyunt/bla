@@ -43,6 +43,11 @@ public class BookServiceImpl extends AbstractService<Book, BookDao> implements B
         return books;
     }
 
+    @Override
+    public void mapBookToAuthor(int bookId, int authorId) {
+        getDao().mapBookToAuthor(bookId, authorId);
+    }
+
     public Optional<Book> findById(int bookId) {
         return getDao().findById(bookId).map(this::initBookEagerly);
     }

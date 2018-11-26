@@ -11,5 +11,5 @@ public interface BookDao extends Dao<Book> {
 
     List<Book> findTenLatestBooks();
 
-    void saveBookAuthor(Author author, Book book);
+    void mapBookToAuthor(int bookId, int authorId);
 }

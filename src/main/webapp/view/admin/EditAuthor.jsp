@@ -7,8 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:forEach var="author" items="${authors}">
-    <div class="row mx-auto" id="authorItem${author.id}">
+<div id="accordion"><c:forEach var="author" items="${authors}">
+    <div class="row mx-auto accordion" id="authorItem${author.id}">
     <div class="col-lg-4 mx-auto my-2">
         <div class="row-fluid  mx-auto border-top media">
             <div class="media-object my-2">
@@ -22,7 +22,9 @@
                                 aria-expanded="false" aria-controls="author${author.id}">
                             Edit
                         </button>
-                        <button class="btn btn-secondary btn-sm float-right" type="button">Add book</button>
+                        <button class="btn btn-secondary btn-sm float-right"
+                                type="button" data-toggle="collapse" data-target="#newBook${author.id}"
+                                aria-expanded="false" aria-controls="newBook${author.id}">Add book</button>
                         <button class="btn btn-secondary btn-sm float-right" type="button">Books</button>
                         <button class="btn btn-danger btn-sm float-right" id="deleteAuthor${author.id}" name="authorId"
                                 value="${author.id}"
@@ -33,7 +35,26 @@
                 </div>
             </div>
         </div>
-        <div class="row-fluid my-2"><div class="collapse" id="author${author.id}"><form action="/admin/author"
+        <div class="row-fluid mx-auto">
+                <div class="row-fluid my-2"><div class="collapse" data-parent="#accordion" id="newBook${author.id}"><form action="/admin/book" method="post">
+                    <div class="form-group">
+                        <label >Book name:</label>
+                        <input type="text" class="form-control" name="bookName" placeholder="book name">
+                    </div>
+                    <div class="form-group">
+                        <label>Book description:</label>
+                        <textarea rows="7" class="form-control" name="bookDescription" placeholder="book description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Year of publication:</label>
+                        <input class="form-control" type="date" name="birthDate" value="${author.birthDate}">
+                    </div>
+                    <input type="hidden" name="authorId" value="${author.id}">
+                    <button type="submit" class="btn btn-secondary btn-sm float-right mb-4">Save</button>
+                </form></div></div>
+
+        </div>
+        <div class="row-fluid my-2"><div class="collapse" data-parent="#accordion" id="author${author.id}"><form action="/admin/author"
         method="post">
             <div class="form-group">
                 <label>First name:</label>
@@ -57,4 +78,4 @@
             <button  type="submit" class="btn btn-secondary btn-sm float-right mb-4">Save</button>
         </form></div></div>
     </div>
-</div></c:forEach>
+</div></c:forEach></div>
