@@ -1,31 +1,35 @@
 package com.softserve.librarymanager.service;
 
+import com.google.inject.Inject;
 import com.softserve.librarymanager.dao.AuthorDao;
 import com.softserve.librarymanager.dao.GenreDao;
-import com.softserve.librarymanager.dao.impl.AuthorDaoImpl;
-import com.softserve.librarymanager.dao.impl.GenreDaoImpl;
 import com.softserve.librarymanager.model.Author;
 
 import java.util.List;
 import java.util.Optional;
 
-public class AuthorServiceImpl extends AbstractService<Author, AuthorDaoImpl> implements AuthorService {
-    private BookService bookService = new BookServiceImpl();
-    private AuthorDao   authorDao   = new AuthorDaoImpl();
-    private GenreDao    genreDao    = new GenreDaoImpl();
+public class AuthorServiceImpl extends AbstractService<Author, AuthorDao> implements AuthorService {
+    @Inject
+    private BookService bookService;
 
-    public AuthorServiceImpl() {
-        super(new AuthorDaoImpl());
+    @Inject
+    private GenreDao    genreDao;
+
+    @Inject
+    public AuthorServiceImpl(AuthorDao dao) {
+        super(dao);
     }
 
     @Override
     public List<Author> findAll() {
-        return authorDao.findAll();
+        List<Author> authors = getDao().findAll();
+        authors.forEach(this::initAuthorEagerly);
+        return authors;
     }
 
     @Override
     public Optional<Author> findById(int authorId) {
-        return authorDao.findById(authorId).map(this::initAuthorEagerly);
+        return getDao().findById(authorId).map(this::initAuthorEagerly);
     }
 
     @Override
@@ -39,5 +43,4 @@ public class AuthorServiceImpl extends AbstractService<Author, AuthorDaoImpl> im
         author.setBooks(bookService.findBooksByAuthorId(authorId));
         return author;
     }
-
 }

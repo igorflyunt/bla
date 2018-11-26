@@ -1,5 +1,6 @@
 package com.softserve.librarymanager.service;
 
+import com.google.inject.Inject;
 import com.softserve.librarymanager.dao.BookDao;
 import com.softserve.librarymanager.dao.GenreDao;
 import com.softserve.librarymanager.dao.impl.BookDaoImpl;
@@ -9,38 +10,41 @@ import com.softserve.librarymanager.model.Book;
 import java.util.List;
 import java.util.Optional;
 
-public class BookServiceImpl extends AbstractService<Book, BookDaoImpl> implements BookService {
-    private BookDao bookDao = new BookDaoImpl();
-    private AuthorService authorDao = new AuthorServiceImpl();
-    private GenreDao genreDao =  new GenreDaoImpl();
+public class BookServiceImpl extends AbstractService<Book, BookDao> implements BookService {
+    @Inject
+    private AuthorService authorDao;
 
-    public BookServiceImpl() {
-        super(new BookDaoImpl());
+    @Inject
+    private GenreDao genreDao;
+
+    @Inject
+    public BookServiceImpl(BookDao dao) {
+        super(dao);
     }
 
     @Override
     public List<Book> findAll() {
-        List<Book> books = bookDao.findAll();
+        List<Book> books = getDao().findAll();
         books.forEach(this::initBookEagerly);
         return books;
     }
 
     @Override
     public List<Book> findBooksByAuthorId(int authorId) {
-        List<Book> books = bookDao.findAllBooksByAuthorId(authorId);
+        List<Book> books = getDao().findAllBooksByAuthorId(authorId);
         books.forEach(this::initBookEagerly);
         return books;
     }
 
     @Override
     public List<Book> findTenLatestBooks() {
-        List<Book> books = bookDao.findTenLatestBooks();
+        List<Book> books = getDao().findTenLatestBooks();
         books.forEach(this::initBookEagerly);
         return books;
     }
 
     public Optional<Book> findById(int bookId) {
-        return bookDao.findById(bookId).map(this::initBookEagerly);
+        return getDao().findById(bookId).map(this::initBookEagerly);
     }
 
     private Book initBookEagerly(Book book) {

@@ -1,5 +1,7 @@
 package com.softserve.librarymanager.servlet.edit;
 
+import com.google.inject.Singleton;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/admin/book")
+@Singleton
 public class EditBook extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)

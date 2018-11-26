@@ -1,5 +1,7 @@
 package com.softserve.librarymanager.servlet.edit;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.softserve.librarymanager.model.Author;
 import com.softserve.librarymanager.service.AuthorService;
 import com.softserve.librarymanager.service.AuthorServiceImpl;
@@ -13,8 +15,11 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(urlPatterns={"/admin/author"})
+@Singleton
 public class EditAuthor extends HttpServlet {
-    private AuthorService authorService = new AuthorServiceImpl();
+    @Inject
+    private AuthorService authorService;
+
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {

@@ -1,5 +1,7 @@
 package com.softserve.librarymanager.servlet.user;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.service.BookService;
 import com.softserve.librarymanager.service.BookServiceImpl;
@@ -13,8 +15,10 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/books")
+@Singleton
 public class BookOverview extends HttpServlet {
-    private BookService bookService = new BookServiceImpl();
+    @Inject
+    private BookService bookService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException,
             IOException {
