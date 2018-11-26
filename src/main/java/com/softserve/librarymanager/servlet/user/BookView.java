@@ -1,6 +1,7 @@
 package com.softserve.librarymanager.servlet.user;
 
 import com.softserve.librarymanager.service.BookService;
+import com.softserve.librarymanager.service.BookServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,14 +12,14 @@ import java.io.IOException;
 
 @WebServlet("/book")
 public class BookView extends HttpServlet {
-    private BookService bookService = new BookService();
+    private BookService bookService = new BookServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int bookid = Integer.parseInt(request.getParameter("bookid"));
-        bookService.findBookById(bookid).ifPresent(b-> request.setAttribute("book", b));
+        bookService.findById(bookid).ifPresent(b-> request.setAttribute("book", b));
         request.getRequestDispatcher("view/user/BookView.jsp").forward(request, response);
     }
 }

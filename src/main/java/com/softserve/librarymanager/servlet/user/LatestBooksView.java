@@ -2,6 +2,7 @@ package com.softserve.librarymanager.servlet.user;
 
 import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.service.BookService;
+import com.softserve.librarymanager.service.BookServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @WebServlet("")
 public class LatestBooksView extends HttpServlet {
-    private BookService bookService = new BookService();
+    private BookService bookService = new BookServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

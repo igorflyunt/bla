@@ -2,6 +2,7 @@ package com.softserve.librarymanager.servlet.user;
 
 import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.service.BookService;
+import com.softserve.librarymanager.service.BookServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @WebServlet("/books")
 public class BookOverview extends HttpServlet {
-    private BookService bookService = new BookService();
+    private BookService bookService = new BookServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException,
             IOException {
@@ -22,7 +23,7 @@ public class BookOverview extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
-        List<Book> books = bookService.findAllBooks();
+        List<Book> books = bookService.findAll();
         request.setAttribute("books", books);
         request.setAttribute("indexPageName", "All books");
         request.getRequestDispatcher("/view/index.jsp").forward(request, response);

@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class AuthorServiceImpl extends AbstractService<Author, AuthorDaoImpl> implements AuthorService {
-    private BookServiceImpl bookService = new BookServiceImpl();
-    private AuthorDao       authorDao   = new AuthorDaoImpl();
-    private GenreDao        genreDao    = new GenreDaoImpl();
+    private BookService bookService = new BookServiceImpl();
+    private AuthorDao   authorDao   = new AuthorDaoImpl();
+    private GenreDao    genreDao    = new GenreDaoImpl();
 
     public AuthorServiceImpl() {
         super(new AuthorDaoImpl());
@@ -36,7 +36,7 @@ public class AuthorServiceImpl extends AbstractService<Author, AuthorDaoImpl> im
     private Author initAuthorEagerly(Author author) {
         int authorId = author.getId();
         author.setGenres(genreDao.findGenresByAuthorId(authorId));
-        author.setBooks(bookService.findAllBooksByAuthorId(authorId));
+        author.setBooks(bookService.findBooksByAuthorId(authorId));
         return author;
     }
 
