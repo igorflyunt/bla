@@ -1,6 +1,9 @@
-package com.softserve.librarymanager.servlet.edit;
+package com.softserve.librarymanager.servlet.admin;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.softserve.librarymanager.model.Author;
+import com.softserve.librarymanager.service.AuthorService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,28 +11,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-@WebServlet("/admin/book")
+@WebServlet(urlPatterns={"/admin/author"})
 @Singleton
-public class EditBook extends HttpServlet {
+public class EditAuthor extends HttpServlet {
+    @Inject
+    private AuthorService authorService;
+
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {
 
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/view/admin/BookEditor.jsp").forward(request, response);
-    }
-
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPut(req, resp);
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
+        List<Author> authors = authorService.findAll();
+        request.setAttribute("authors", authors);
+        request.getRequestDispatcher("/view/admin/AuthorEditor.jsp").forward(request, response);
     }
 }
