@@ -1,6 +1,7 @@
 package com.softserve.librarymanager.servlet.user;
 
 import com.softserve.librarymanager.service.AuthorService;
+import com.softserve.librarymanager.service.AuthorServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/author")
 public class AuthorView extends HttpServlet {
-    private AuthorService authorService = new AuthorService();
+    private AuthorService authorService = new AuthorServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -20,7 +21,7 @@ public class AuthorView extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int authorId = Integer.parseInt(request.getParameter("authorId"));
-        authorService.findAuthorById(authorId).ifPresent(author -> request.setAttribute("author", author));
+        authorService.findById(authorId).ifPresent(author -> request.setAttribute("author", author));
         request.getRequestDispatcher("view/user/AuthorView.jsp").forward(request, response);
     }
 }
