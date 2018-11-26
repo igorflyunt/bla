@@ -47,7 +47,7 @@
                     </div>
                     <div class="form-group">
                         <label>Year of publication:</label>
-                        <input class="form-control" type="date" name="birthDate" value="${author.birthDate}">
+                        <input class="form-control" type="date" name="publicationYear" value="${author.birthDate}">
                     </div>
                     <input type="hidden" name="authorId" value="${author.id}">
                     <button type="submit" class="btn btn-secondary btn-sm float-right mb-4">Save</button>
@@ -66,9 +66,7 @@
             </div>
             <div class="form-group">
                 <label>Description:</label>
-                <textarea class="form-control" name="biography" placeholder="author description" rows="7">
-                        ${author.biography}
-                </textarea>
+                <textarea class="form-control" name="biography" placeholder="author description" rows="7">${author.biography}</textarea>
             </div>
             <div class="form-group">
                 <label>Birth date:</label>

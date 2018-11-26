@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @WebServlet("/admin/book")
 @Singleton
@@ -26,9 +29,16 @@ public class EditBook extends HttpServlet {
         int authorId = Integer.parseInt(request.getParameter("authorId"));
         String bookName = request.getParameter("bookName");
         String bookDescription = request.getParameter("bookDescription");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
         Book book = new Book();
         book.setBookName(bookName);
         book.setDescription(bookDescription);
+        try {
+            Date firstPublished = format.parse(request.getParameter("publicationYear"));
+            book.setFirstPublished(firstPublished);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         bookService.save(book);
         bookService.mapBookToAuthor(book.getId(), authorId);
         response.sendRedirect("/admin/author");
