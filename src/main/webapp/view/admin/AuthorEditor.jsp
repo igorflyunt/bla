@@ -12,7 +12,7 @@
 
 <body>
 <jsp:include page="../../layout/adminnavbar.jsp"/>
-<div class="container-fluid">
+<div class="container-fluid" id="author-list">
     <jsp:include page="AddAuthor.jsp"/>
     <jsp:include page="EditAuthor.jsp"/>
 </div>

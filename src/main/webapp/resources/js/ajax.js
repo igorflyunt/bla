@@ -1,20 +1,18 @@
-$(document).ready(function () {
-    $('#addBook').click(function () {
-        var bookName = $('#bookName').val();
-        var bookDescription = $('#bookDescription').val();
-        var firstPublished = $('#firstPublished').val();
+$(document).ready(deleteAuthor());
+
+function deleteAuthor () {
+    $(document).on("click", 'button[name=authorId]', function (e) {
+        const id = e.target.id;
+        const authorId = $('#' + id).val();
         $.ajax({
-            type: 'POST',
+            url: '/admin/author?authorId=' + authorId,
+            type: "DELETE",
             data: {
-                bookName: bookName,
-                bookDescription: bookDescription,
-                firstPublished: firstPublished,
-                genres: []
+                authorId: authorId
             },
-            url: '/admin/book',
-            success: function (response) {
-                $('#bookRow').append(response);
+            success:function (res) {
+                $('#authorItem' + authorId).remove();
             }
         });
     });
-});
+}

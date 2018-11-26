@@ -7,7 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:forEach var="author" items="${authors}"><div class="row mx-auto">
+<c:forEach var="author" items="${authors}">
+    <div class="row mx-auto" id="authorItem${author.id}">
     <div class="col-lg-4 mx-auto my-2">
         <div class="row-fluid  mx-auto border-top media">
             <div class="media-object my-2">
@@ -15,15 +16,20 @@
             </div>
             <div class="media-body my-2">
                 <div class="float-right">
-                    <form action="/admin/author" method="post">
-                        <button class="btn btn-secondary btn-sm mr-2"
-                                type="button" data-toggle="collapse" data-target="#author${author.id}"
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-secondary btn-sm"
+                                type="button" data-toggle="collapse" name="updateAuthorBtn" data-target="#author${author.id}"
                                 aria-expanded="false" aria-controls="author${author.id}">
                             Edit
                         </button>
-                        <input type="hidden" value="${author.id}">
-                        <button class="btn btn-danger btn-sm" name="delete" type="submit">Delete</button>
-                    </form>
+                        <button class="btn btn-secondary btn-sm float-right" type="button">Add book</button>
+                        <button class="btn btn-secondary btn-sm float-right" type="button">Books</button>
+                        <button class="btn btn-danger btn-sm float-right" id="deleteAuthor${author.id}" name="authorId"
+                                value="${author.id}"
+                                type="button">
+                            Delete
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
