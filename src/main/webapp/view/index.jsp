@@ -6,15 +6,8 @@
 <jsp:include page="../layout/navbar.jsp"/>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-4 ">
-            <div class="list-group text-center float-left">
-                <a href="#" class="list-group-item my-2">All</a>
-                <a href="#" class="list-group-item my-2">Currently reading</a>
-                <a href="#" class="list-group-item my-2">Read</a>
-                <a href="#" class="list-group-item my-2">To-Read</a>
-            </div>
-        </div>
-        <div class="col-lg-4 ">
+
+        <div class="col-lg-4 mx-auto">
             <h3 class="text-justify"> ${indexPageName}</h3>
             <ul class="list-unstyled">
                 <c:forEach items="${books}" var="book">
