@@ -44,7 +44,7 @@ public class EditBook extends HttpServlet {
         }
         bookService.save(book);
         bookService.mapBookToAuthor(book.getId(), authorId);
-        response.sendRedirect("/admin/author");
+        response.sendRedirect("/admin/books");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

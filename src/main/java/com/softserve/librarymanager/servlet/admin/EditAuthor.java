@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,8 +43,7 @@ public class EditAuthor extends HttpServlet {
         authorService.save(author);
         response.sendRedirect("/admin/author");
     }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Author> authors = authorService.findAll();
         request.setAttribute("authors", authors);
         request.getRequestDispatcher("/view/admin/AuthorEditor.jsp").forward(request, response);
