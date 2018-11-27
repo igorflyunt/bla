@@ -19,7 +19,7 @@ public class BookDaoImpl extends GenericDao<Book> implements BookDao, Dao<Book> 
     private static final String SQL_INSERT_BOOK_INTO_AUTHOR = "insert into author_book (author_id, book_id)" +
             " values (?, ?)";
     private static final String SQL_AUTHOR_HAS_BOOK = "select id from author_book" +
-            " where exists(select id from author_book where author_id = ?)";
+            " where exists(select id from author_book where book_id = ?)";
 
     private static final String SQL_UPDATE_BOOK = "update book" +
             " set name = ?, description = ?," +
@@ -57,8 +57,8 @@ public class BookDaoImpl extends GenericDao<Book> implements BookDao, Dao<Book> 
             save(null, SQL_INSERT_BOOK_INTO_AUTHOR, authorId, bookId);
     }
 
-    private boolean authorHasNoBook(int authorId) {
-        return !query(SQL_AUTHOR_HAS_BOOK, authorId);
+    private boolean authorHasNoBook(int bookId) {
+        return !query(SQL_AUTHOR_HAS_BOOK, bookId);
     }
 
     @Override
