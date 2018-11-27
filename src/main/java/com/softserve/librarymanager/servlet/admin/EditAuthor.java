@@ -25,7 +25,6 @@ public class EditAuthor extends HttpServlet {
     private AuthorService authorService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String bio = request.getParameter("biography");
@@ -50,11 +49,6 @@ public class EditAuthor extends HttpServlet {
         List<Author> authors = authorService.findAll();
         request.setAttribute("authors", authors);
         request.getRequestDispatcher("/view/admin/AuthorEditor.jsp").forward(request, response);
-    }
-
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
     }
 
     @Override
