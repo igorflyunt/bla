@@ -7,9 +7,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="container-fluid">
+<div class="container-fluid" id="bookList">
     <div id="accordion"><c:forEach var="book" items="${books}">
-        <div class="row mx-auto accordion" id="authorItem${book.id}">
+        <div class="row mx-auto accordion" id="bookItem${book.id}">
             <div class="col-lg-4 mx-auto my-2">
                 <div class="row-fluid  mx-auto border-top media">
                     <div class="media-object my-2">
@@ -23,7 +23,7 @@
                                         aria-expanded="false" aria-controls="book${book.id}">
                                     Edit
                                 </button>
-                                <button class="btn btn-danger btn-sm float-right" id="deleteBook${book.id}" name="bookId"
+                                <button class="btn btn-danger btn-sm float-right" id="deleteBook${book.id}" name="deleteBookBtn"
                                         value="${book.id}"
                                         type="button">
                                     Delete
