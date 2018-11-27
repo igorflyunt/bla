@@ -8,10 +8,10 @@
     <div class="row">
         <div class="col-lg-4 ">
             <div class="list-group text-center float-left">
-                <a href="#" class="list-group-item my-2">All</a>
-                <a href="#" class="list-group-item my-2">Currently reading</a>
-                <a href="#" class="list-group-item my-2">Read</a>
-                <a href="#" class="list-group-item my-2">To-Read</a>
+                <a href="/user?shelf=all" class="list-group-item my-2">All</a>
+                <a href="/user?shelf=currently-read" class="list-group-item my-2">Currently reading</a>
+                <a href="/user?shelf=read" class="list-group-item my-2">Read</a>
+                <a href="/user?shelf=to-read" class="list-group-item my-2">To-Read</a>
             </div>
         </div>
         <div class="col-lg-4 ">
@@ -35,10 +35,9 @@
                                     Want to read
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Want to read</a>
-                                    <a class="dropdown-item" href="#">Read</a>
-                                    <a class="dropdown-item" href="#">Currently reading</a>
-                                    <a class="dropdown-item" href="#">To read</a>
+                                    <a class="dropdown-item" href="/user?shelf=to-read">Want to read</a>
+                                    <a class="dropdown-item" href="/user?shelf=read">Read</a>
+                                    <a class="dropdown-item" href="/user?shelf=currently-reading">Currently reading</a>
                                 </div>
                             </div>
                         </div>
