@@ -14,7 +14,7 @@
                 <a href="#" class="list-group-item my-2">To-Read</a>
             </div>
         </div>
-        <div class="col-lg-5 ">
+        <div class="col-lg-4 ">
             <h3 class="text-justify"> ${indexPageName}</h3>
             <ul class="list-unstyled">
                 <c:forEach items="${books}" var="book">
@@ -29,9 +29,9 @@
                                 </small>
                             </c:forEach>
                         </div>
-                        <div class="media-body ">
+                        <div class="media-body col-sm-3" >
                             <div class="btn-group float-right">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Want to read
                                 </button>
                                 <div class="dropdown-menu">

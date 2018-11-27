@@ -29,13 +29,13 @@
         </div>
     </div>
     <div class="row mx-auto">
-        <div class="col-lg-4 mx-auto">
+        <div class="col-lg-5 mx-auto">
             <h3 class="text-left"> ${indexPageName}</h3>
             <ul class="list-unstyled">
                 <c:forEach items="${author.books}" var="book">
                     <li class="media py-2 my-4 mx-0 border-top">
                         <img class="book-cover-list media-object mr-3" src="https://images-na.ssl-images-amazon.com/images/I/51K84pomCRL._SX305_BO1,204,203,200_.jpg" alt="...">
-                        <div class="media-body">
+                        <div class="media-body ">
                             <h5 class="mt-0 mb-1"><a class="custom-link" href="/book?bookid=${book.id}">${book.name}</a></h5>
                             <c:forEach items="${book.authors}" var="author" varStatus="loop">
                                 <small>
@@ -44,9 +44,9 @@
                                 </small>
                             </c:forEach>
                         </div>
-                        <div class="media-body">
+                        <div class="media-body col-lg-3">
                             <div class="btn-group float-right">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Want to read
                                 </button>
                                 <div class="dropdown-menu">
