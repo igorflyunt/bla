@@ -4,6 +4,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
+import com.softserve.librarymanager.servlet.admin.AdminHome;
 import com.softserve.librarymanager.servlet.admin.EditAuthor;
 import com.softserve.librarymanager.servlet.admin.EditBook;
 import com.softserve.librarymanager.servlet.user.AuthorView;
@@ -23,6 +24,7 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                 serve("/author").with(AuthorView.class);
                 serve("/admin/author").with(EditAuthor.class);
                 serve("/admin/book").with(EditBook.class);
+                serve("/admin").with(AdminHome.class);
             }
         }, new ServiceModule(), new DaoModule());
     }
