@@ -18,6 +18,9 @@ public class BookDaoImpl extends GenericDao<Book> implements BookDao, Dao<Book> 
             " values (?, ?, ?)";
     private static final String SQL_INSERT_BOOK_INTO_AUTHOR = "insert into author_book (author_id, book_id)" +
             " values (?, ?)";
+    private static final String SQL_AUTHOR_HAS_BOOK = "select id from author_book" +
+            " where exists(select id from author_book where author_id = ?)";
+
     private static final String SQL_UPDATE_BOOK = "update book" +
             " set name = ?, description = ?," +
             " first_published = ?" +
@@ -50,14 +53,20 @@ public class BookDaoImpl extends GenericDao<Book> implements BookDao, Dao<Book> 
 
     @Override
     public void mapBookToAuthor(int bookId, int authorId) {
-        save(null, SQL_INSERT_BOOK_INTO_AUTHOR, authorId, bookId);
+        if (authorHasNoBook(authorId))
+            save(null, SQL_INSERT_BOOK_INTO_AUTHOR, authorId, bookId);
+    }
+
+    private boolean authorHasNoBook(int authorId) {
+        return !query(SQL_AUTHOR_HAS_BOOK, authorId);
     }
 
     @Override
     public void save(Book entity) {
-        if (entityExists(entity)) {
+        int bookId = entity.getId();
+        if (entityExists(bookId)) {
             save(entity, SQL_UPDATE_BOOK, entity.getName(), entity.getDescription(),
-                    entity.getFirstPublished(), entity.getId());
+                    entity.getFirstPublished(), bookId);
         } else {
             save(entity, SQL_INSERT_BOOK, entity.getName(), entity.getDescription(),
                     entity.getFirstPublished());

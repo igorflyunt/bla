@@ -2,6 +2,7 @@ package com.softserve.librarymanager.servlet.admin;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.softserve.librarymanager.model.AbstractEntity;
 import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.service.AuthorService;
 import com.softserve.librarymanager.service.BookService;
@@ -27,11 +28,12 @@ public class EditBook extends HttpServlet {
     private BookService bookService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int authorId = Integer.parseInt(request.getParameter("authorId"));
+        int authorId = getIdParemeterIfExists(request.getParameter("authorId"));
         String bookName = request.getParameter("bookName");
         String bookDescription = request.getParameter("bookDescription");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
         Book book = new Book();
+        setEntityIdIfExists(request.getParameter("bookId"), book);
         book.setBookName(bookName);
         book.setDescription(bookDescription);
         try {
@@ -53,9 +55,17 @@ public class EditBook extends HttpServlet {
         request.getRequestDispatcher("/view/admin/BookEditor.jsp").forward(request, response);
     }
 
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private int getIdParemeterIfExists(String stringParam) {
+        if (stringParam == null || stringParam.isEmpty())
+            return AbstractEntity.NO_ELEMENT;
+        return Integer.parseInt(stringParam);
+    }
 
+    private void setEntityIdIfExists(String stringId, AbstractEntity entity) {
+        if (stringId == null || stringId.isEmpty())
+            return;
+        int id = Integer.parseInt(stringId);
+        entity.setId(id);
     }
 
     @Override

@@ -73,8 +73,8 @@ public abstract class GenericDao<E extends AbstractEntity> implements Dao<E> {
         System.out.println(query);
     }
 
-    protected boolean entityExists(E entity) {
-        return findById(entity.getId()).isPresent();
+    protected boolean entityExists(int entityId) {
+        return findById(entityId).isPresent();
     }
 
     protected List<E> query(String query, EntityMapper<E> entityMapper, Object... paramArgs) {
@@ -93,6 +93,19 @@ public abstract class GenericDao<E extends AbstractEntity> implements Dao<E> {
             throw new RuntimeException(e);
         }
         return entities;
+    }
+
+    protected boolean query(String query, Object... paramArgs) {
+        try {
+            PreparedStatement st = connection.prepareStatement(query);
+            for (int i = 0; i < paramArgs.length; i++) {
+                Object paramArg = paramArgs[i];
+                st.setObject(i + 1, paramArg);
+            }
+            return st.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

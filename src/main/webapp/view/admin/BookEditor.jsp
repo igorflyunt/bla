@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label>Book description:</label>
                             <textarea rows="7" class="form-control"
-                                      name="bookDescription" placeholder="book description">${book.description}"</textarea>
+                                      name="bookDescription" placeholder="book description">${book.description}</textarea>
                         </div>
                         <div class="form-group">
                             <label>Year of publication:</label>

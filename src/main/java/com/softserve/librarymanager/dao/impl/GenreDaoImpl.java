@@ -67,8 +67,9 @@ public class GenreDaoImpl extends GenericDao<Genre> implements GenreDao, Dao<Gen
 
     @Override
     public void save(Genre entity) {
-        if (entityExists(entity)) {
-            save(entity, SQL_UPDATE_GENRE, entity.getId());
+        int genreId = entity.getId();
+        if (entityExists(genreId)) {
+            save(entity, SQL_UPDATE_GENRE, genreId);
         } else {
             save(entity, SQL_INSERT_GENRE, entity.getGenreName());
         }

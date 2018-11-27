@@ -41,10 +41,11 @@ public class AuthorDaoImpl extends GenericDao<Author> implements AuthorDao, Dao<
 
     @Override
     public void save(Author entity) {
-        if (entityExists(entity)) {
+        int authorId = entity.getId();
+        if (entityExists(authorId)) {
             save(entity, SQL_UPDATE_AUTHOR, entity.getFirstName(), entity.getLastName(), entity.getBirthDate(),
                     entity.getBiography(),
-                    entity.getId());
+                    authorId);
         } else {
             save(entity, SQL_INSERT_AUTHOR, entity.getFirstName(), entity.getLastName(), entity.getBirthDate(),
                     entity.getBiography());
