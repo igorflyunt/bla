@@ -20,7 +20,7 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                 serve("/author").with(AuthorView.class);
                 serve("/admin/author").with(EditAuthor.class);
                 serve("/admin/book").with(EditBook.class);
-                serve("/bookshelf").with(BookShelf.class);
+                serve("/user").with(UserServlet.class);
             }
         }, new ServiceModule(), new DaoModule());
     }

@@ -2,10 +2,9 @@ package com.softserve.librarymanager.model;
 
 public class BookShelf extends AbstractEntity {
     public enum BookShelves {
-        READ ("Read"),
-        WANT_TO_READ ("Want to read"),
-        CURRENTLY_READING ("Currently reading"),
-        TO_READ ("To-read");
+        READ ("read"),
+        CURRENTLY_READING ("currently-reading"),
+        TO_READ ("to-read");
 
         private String bookShelfName;
 
@@ -16,7 +15,7 @@ public class BookShelf extends AbstractEntity {
 
     private BookShelves status;
 
-    private BookShelf() { }
+    public BookShelf() { }
 
     public String getBookShelfName() {
         return status.bookShelfName;
