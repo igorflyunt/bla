@@ -6,10 +6,7 @@ import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
 import com.softserve.librarymanager.servlet.admin.EditAuthor;
 import com.softserve.librarymanager.servlet.admin.EditBook;
-import com.softserve.librarymanager.servlet.user.AuthorView;
-import com.softserve.librarymanager.servlet.user.BookOverview;
-import com.softserve.librarymanager.servlet.user.BookView;
-import com.softserve.librarymanager.servlet.user.LatestBooksView;
+import com.softserve.librarymanager.servlet.user.*;
 
 public class GuiceServletConfig extends GuiceServletContextListener {
     @Override
@@ -23,6 +20,7 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                 serve("/author").with(AuthorView.class);
                 serve("/admin/author").with(EditAuthor.class);
                 serve("/admin/book").with(EditBook.class);
+                serve("/bookshelf").with(BookShelf.class);
             }
         }, new ServiceModule(), new DaoModule());
     }
