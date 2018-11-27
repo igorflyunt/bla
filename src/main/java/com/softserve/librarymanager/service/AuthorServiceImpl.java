@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.softserve.librarymanager.dao.AuthorDao;
 import com.softserve.librarymanager.dao.GenreDao;
 import com.softserve.librarymanager.model.Author;
+import com.softserve.librarymanager.model.Book;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +36,14 @@ public class AuthorServiceImpl extends AbstractService<Author, AuthorDao> implem
     @Override
     public List<Author> findAuthorsByBookId(int bookId) {
         return getDao().findAuthorsByBookId(bookId);
+    }
+
+    @Override
+    public void delete(Author entity) {
+        int authorId = entity.getId();
+        List<Book> books = bookService.findBooksByAuthorId(authorId);
+        books.forEach(bookService::delete);
+        getDao().delete(entity);
     }
 
     private Author initAuthorEagerly(Author author) {
