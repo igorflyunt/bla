@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="accordion"><c:forEach var="author" items="${authors}">
-    <div class="row mx-auto accordion" id="authorItem${author.id}">
+    <div class="row mx-auto" id="authorItem${author.id}">
     <div class="col-lg-4 mx-auto my-2">
         <div class="row-fluid  mx-auto border-top media">
-            <div class="media-object my-2">
+            <div class="media-object my-2" id="a${author.id}">
                     ${author.firstName} ${author.lastName}
             </div>
             <div class="media-body my-2">
