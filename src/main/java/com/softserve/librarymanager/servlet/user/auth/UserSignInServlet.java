@@ -1,4 +1,4 @@
-package com.softserve.librarymanager.servlet.user;
+package com.softserve.librarymanager.servlet.user.auth;
 
 import com.google.inject.Singleton;
 

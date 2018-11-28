@@ -9,6 +9,8 @@ import com.softserve.librarymanager.servlet.admin.AdminHome;
 import com.softserve.librarymanager.servlet.admin.EditAuthor;
 import com.softserve.librarymanager.servlet.admin.EditBook;
 import com.softserve.librarymanager.servlet.user.*;
+import com.softserve.librarymanager.servlet.user.auth.UserSignInServlet;
+import com.softserve.librarymanager.servlet.user.auth.UserSignUpServlet;
 
 public class GuiceServletConfig extends GuiceServletContextListener {
     @Override
