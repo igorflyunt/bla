@@ -29,7 +29,7 @@ public class BookShelfDaoImpl extends GenericDao<BookShelf> implements BookShelf
 
     @Override
     public List<Book> getBooksByShelfNameAndAuthorId(String shelfName, int authorId) {
-        return query(SQL_SELECT_SHELF, new BookMapper("b"), shelfName, authorId);
+        return selectMany(SQL_SELECT_SHELF, new BookMapper("b"), shelfName, authorId);
     }
 
     @Override

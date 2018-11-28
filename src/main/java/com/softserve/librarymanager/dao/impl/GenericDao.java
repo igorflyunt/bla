@@ -77,7 +77,7 @@ public abstract class GenericDao<E extends AbstractEntity> implements Dao<E> {
         return findById(entityId).isPresent();
     }
 
-    protected <T extends AbstractEntity> List<T> query(String query, EntityMapper<T> entityMapper, Object... paramArgs) {
+    protected <T extends AbstractEntity> List<T> selectMany(String query, EntityMapper<T> entityMapper, Object... paramArgs) {
         List<T> entities = new ArrayList<>();
         try {
             PreparedStatement st = connection.prepareStatement(query);
@@ -95,7 +95,25 @@ public abstract class GenericDao<E extends AbstractEntity> implements Dao<E> {
         return entities;
     }
 
-    protected boolean query(String query, Object... paramArgs) {
+    protected <T extends AbstractEntity> T selectOne(String query, EntityMapper<T> entityMapper, Object... paramArgs) {
+        T entity = null;
+        try {
+            PreparedStatement st = connection.prepareStatement(query);
+            for (int i = 0; i < paramArgs.length; i++) {
+                Object paramArg = paramArgs[i];
+                st.setObject(i + 1, paramArg);
+            }
+            ResultSet resultSet = st.executeQuery();
+            if (resultSet.next()) {
+               entity = entityMapper.mapToEntity(resultSet);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return entity;
+    }
+
+    protected boolean execute(String query, Object... paramArgs) {
         try {
             PreparedStatement st = connection.prepareStatement(query);
             for (int i = 0; i < paramArgs.length; i++) {

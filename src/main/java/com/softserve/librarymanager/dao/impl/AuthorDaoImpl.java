@@ -36,7 +36,7 @@ public class AuthorDaoImpl extends GenericDao<Author> implements AuthorDao, Dao<
 
     @Override
     public List<Author> findAuthorsByBookId(int bookId) {
-        return query(SQL_SELECT_AUTHORS_BY_BOOK_ID, new AuthorMapper(authorAlias), bookId);
+        return selectMany(SQL_SELECT_AUTHORS_BY_BOOK_ID, new AuthorMapper(authorAlias), bookId);
     }
 
     @Override

@@ -47,12 +47,12 @@ public class GenreDaoImpl extends GenericDao<Genre> implements GenreDao, Dao<Gen
 
     @Override
     public List<Genre> findGenresByBookId(int bookId) {
-        return query(SQL_SELECT_GENRES_BY_BOOK_ID, new GenreMapper(genreAlias), bookId);
+        return selectMany(SQL_SELECT_GENRES_BY_BOOK_ID, new GenreMapper(genreAlias), bookId);
     }
 
     @Override
     public List<Genre> findGenresByAuthorId(int authorId) {
-        return query(SQL_SELECT_GENRES_BY_AUTHOR_ID, new GenreMapper(genreAuthorAlias), authorId);
+        return selectMany(SQL_SELECT_GENRES_BY_AUTHOR_ID, new GenreMapper(genreAuthorAlias), authorId);
     }
 
     @Override

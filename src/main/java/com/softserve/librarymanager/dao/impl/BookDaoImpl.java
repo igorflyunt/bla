@@ -43,12 +43,12 @@ public class BookDaoImpl extends GenericDao<Book> implements BookDao, Dao<Book> 
 
     @Override
     public List<Book> findAllBooksByAuthorId(int authorId) {
-        return query(SQL_SELECT_BOOKS_BY_AUTHOR_ID, new BookMapper(bookAlias), authorId);
+        return selectMany(SQL_SELECT_BOOKS_BY_AUTHOR_ID, new BookMapper(bookAlias), authorId);
     }
 
     @Override
     public List<Book> findTenLatestBooks() {
-        return query(SQL_SELECT_TEN_LATEST_BOOKS, new BookMapper());
+        return selectMany(SQL_SELECT_TEN_LATEST_BOOKS, new BookMapper());
     }
 
     @Override
@@ -58,7 +58,7 @@ public class BookDaoImpl extends GenericDao<Book> implements BookDao, Dao<Book> 
     }
 
     private boolean authorHasNoBook(int bookId) {
-        return !query(SQL_AUTHOR_HAS_BOOK, bookId);
+        return !execute(SQL_AUTHOR_HAS_BOOK, bookId);
     }
 
     @Override
