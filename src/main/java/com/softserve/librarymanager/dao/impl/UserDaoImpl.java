@@ -7,7 +7,6 @@ import com.softserve.librarymanager.dao.mapper.UserMapper;
 import com.softserve.librarymanager.dao.table.TableDefinition;
 import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.model.User;
-import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.List;
 
@@ -40,9 +39,8 @@ public class UserDaoImpl extends GenericDao<User> implements UserDao {
 
     @Override
     public void save(User entity) {
-        String hashedPassword = BCrypt.hashpw(entity.getPassword(), BCrypt.gensalt());
         save(entity, SQL_INSERT_USER, entity.getFirstName(), entity.getLastName(), entity.getRole(),
                 entity.getUsername(),
-                hashedPassword);
+                entity.getPassword());
     }
 }
