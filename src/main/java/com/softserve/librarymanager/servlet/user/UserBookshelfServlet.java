@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/user")
+@WebServlet("/user/bookshelf")
 @Singleton
-public class UserServlet extends HttpServlet {
+public class UserBookshelfServlet extends HttpServlet {
     @Inject
     private BookService bookService;
 
