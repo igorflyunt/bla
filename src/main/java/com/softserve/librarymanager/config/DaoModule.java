@@ -1,12 +1,8 @@
 package com.softserve.librarymanager.config;
 
 import com.google.inject.AbstractModule;
-import com.softserve.librarymanager.dao.AuthorDao;
-import com.softserve.librarymanager.dao.BookDao;
-import com.softserve.librarymanager.dao.GenreDao;
-import com.softserve.librarymanager.dao.impl.AuthorDaoImpl;
-import com.softserve.librarymanager.dao.impl.BookDaoImpl;
-import com.softserve.librarymanager.dao.impl.GenreDaoImpl;
+import com.softserve.librarymanager.dao.*;
+import com.softserve.librarymanager.dao.impl.*;
 
 public class DaoModule extends AbstractModule {
     @Override
@@ -14,5 +10,7 @@ public class DaoModule extends AbstractModule {
         bind(AuthorDao.class).to(AuthorDaoImpl.class);
         bind(BookDao.class).to(BookDaoImpl.class);
         bind(GenreDao.class).to(GenreDaoImpl.class);
+        bind(UserDao.class).to(UserDaoImpl.class);
+        bind(BookShelfDao.class).to(BookShelfDaoImpl.class);
     }
 }
