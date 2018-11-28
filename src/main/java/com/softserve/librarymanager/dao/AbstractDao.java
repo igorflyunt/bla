@@ -1,18 +1,14 @@
-package com.softserve.librarymanager.dao.impl;
+package com.softserve.librarymanager.dao;
 
-import com.softserve.librarymanager.dao.Dao;
 import com.softserve.librarymanager.dao.mapper.EntityMapper;
 import com.softserve.librarymanager.dao.table.TableDefinition;
-import com.softserve.librarymanager.db.DataSource;
 import com.softserve.librarymanager.db.JDBCQuery;
 import com.softserve.librarymanager.model.AbstractEntity;
 
-import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
 public abstract class AbstractDao<E extends AbstractEntity> implements Dao<E> {
-    private Connection connection = DataSource.getDbConnection();
     private EntityMapper<E> entityMapper;
     private TableDefinition tableDefinition;
 

@@ -1,5 +1,6 @@
 package com.softserve.librarymanager.dao.impl;
 
+import com.softserve.librarymanager.dao.AbstractDao;
 import com.softserve.librarymanager.dao.UserDao;
 import com.softserve.librarymanager.dao.mapper.BookMapper;
 import com.softserve.librarymanager.dao.mapper.EntityMapper;
