@@ -15,7 +15,7 @@ public abstract class AbstractService<E, D extends Dao<E>> implements Service<E>
 
     @Override
     public void save(E entity) {
-        this.dao.save(entity);
+        this.dao.saveOrUpdate(entity);
     }
 
     @Override

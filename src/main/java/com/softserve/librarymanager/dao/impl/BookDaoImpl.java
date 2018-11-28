@@ -63,7 +63,7 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao, Dao<Book>
     }
 
     @Override
-    public void save(Book entity) {
+    public void saveOrUpdate(Book entity) {
         int bookId = entity.getId();
         if (entityExists(bookId)) {
             JDBCQuery.update(entity, SQL_UPDATE_BOOK, entity.getName(), entity.getDescription(),

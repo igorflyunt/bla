@@ -8,7 +8,7 @@ public interface Dao<E> {
 
     Optional<E> findById(int id);
 
-    void save(E entity);
+    void saveOrUpdate(E entity);
 
     void delete(E entity);
 
