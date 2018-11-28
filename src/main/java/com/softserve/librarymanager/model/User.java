@@ -5,7 +5,9 @@ import java.util.List;
 public class User extends Person {
 
     private List<Book> books;
-    private UserRole role;
+    private static final UserRole DEFAULT_ROLE = UserRole.USER;
+
+    private UserRole role = DEFAULT_ROLE;
 
     private User() { }
 
