@@ -13,6 +13,8 @@ import com.softserve.librarymanager.servlet.admin.AdminHome;
 import com.softserve.librarymanager.servlet.admin.EditAuthor;
 import com.softserve.librarymanager.servlet.admin.EditBook;
 import com.softserve.librarymanager.servlet.user.UserBookshelfServlet;
+import com.softserve.librarymanager.servlet.user.UserSignInServlet;
+import com.softserve.librarymanager.servlet.user.UserSignUpServlet;
 
 public class GuiceServletConfig extends GuiceServletContextListener {
     @Override
@@ -26,9 +28,11 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                 serve("/author").with(AuthorDetailsServlet.class);
                 serve("/admin/author").with(EditAuthor.class);
                 serve("/admin/book").with(EditBook.class);
-                serve("/user/bookshelf").with(UserBookshelfServlet.class);
                 serve("/admin").with(AdminHome.class);
                 serve("/admin/books").with(AdminBooks.class);
+                serve("/user/bookshelf").with(UserBookshelfServlet.class);
+                serve("/user/auth/signup").with(UserSignUpServlet.class);
+                serve("/user/auth/signin").with(UserSignInServlet.class);
             }
         }, new ServiceModule(), new DaoModule());
     }
