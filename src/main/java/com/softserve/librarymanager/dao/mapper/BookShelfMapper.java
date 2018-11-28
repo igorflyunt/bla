@@ -13,6 +13,8 @@ public class BookShelfMapper implements EntityMapper<BookShelf> {
         BookShelf bookShelf = new BookShelf();
         final BookShelves shelfName = BookShelves.valueOf(resultSet.getString("shelf_name"));
         bookShelf.setId(resultSet.getInt("id"));
+        bookShelf.setAuthorId(resultSet.getInt("authorId"));
+        bookShelf.setBookId(resultSet.getInt("bookId"));
         bookShelf.setStatus(shelfName);
         return bookShelf;
     }
