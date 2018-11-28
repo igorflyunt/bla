@@ -1,7 +1,8 @@
-package com.softserve.librarymanager.servlet;
+package com.softserve.librarymanager.servlet.user;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.service.BookService;
 
 import javax.servlet.ServletException;
@@ -10,19 +11,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-@WebServlet("/book")
+@WebServlet("")
 @Singleton
-public class BookDetailsServlet extends HttpServlet {
+public class LatestBooksServlet extends HttpServlet {
     @Inject
     private BookService bookService;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int bookid = Integer.parseInt(request.getParameter("bookid"));
-        bookService.findById(bookid).ifPresent(b-> request.setAttribute("book", b));
-        request.getRequestDispatcher("view/user/BookView.jsp").forward(request, response);
+        List<Book> tenLatestBooks = bookService.findTenLatestBooks();
+        request.setAttribute("books", tenLatestBooks);
+        request.setAttribute("indexPageName", "Latest Books");
+        request.getRequestDispatcher("/view/index.jsp").forward(request, response);
     }
 }

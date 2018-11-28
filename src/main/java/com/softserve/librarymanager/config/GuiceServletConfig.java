@@ -4,17 +4,11 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
-import com.softserve.librarymanager.servlet.AllBooksServlet;
-import com.softserve.librarymanager.servlet.AuthorDetailsServlet;
-import com.softserve.librarymanager.servlet.BookDetailsServlet;
-import com.softserve.librarymanager.servlet.LatestBooksServlet;
 import com.softserve.librarymanager.servlet.admin.AdminBooks;
 import com.softserve.librarymanager.servlet.admin.AdminHome;
 import com.softserve.librarymanager.servlet.admin.EditAuthor;
 import com.softserve.librarymanager.servlet.admin.EditBook;
-import com.softserve.librarymanager.servlet.user.UserBookshelfServlet;
-import com.softserve.librarymanager.servlet.user.UserSignInServlet;
-import com.softserve.librarymanager.servlet.user.UserSignUpServlet;
+import com.softserve.librarymanager.servlet.user.*;
 
 public class GuiceServletConfig extends GuiceServletContextListener {
     @Override

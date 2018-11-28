@@ -20,6 +20,6 @@ public class UserSignUpServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/view/user/UserSignUpView.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/user/auth/UserSignUpView.jsp").forward(request, response);
     }
 }
