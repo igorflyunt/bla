@@ -13,6 +13,9 @@ public class BookShelf extends AbstractEntity {
         }
     }
 
+    private int authorId;
+    private int bookId;
+
     private BookShelves status;
 
     public BookShelf() { }
@@ -23,5 +26,21 @@ public class BookShelf extends AbstractEntity {
 
     public void setStatus(BookShelves status) {
         this.status = status;
+    }
+
+    public int getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
+    }
+
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
     }
 }

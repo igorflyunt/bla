@@ -77,8 +77,8 @@ public abstract class GenericDao<E extends AbstractEntity> implements Dao<E> {
         return findById(entityId).isPresent();
     }
 
-    protected List<E> query(String query, EntityMapper<E> entityMapper, Object... paramArgs) {
-        List<E> entities = new ArrayList<>();
+    protected <T extends AbstractEntity> List<T> query(String query, EntityMapper<T> entityMapper, Object... paramArgs) {
+        List<T> entities = new ArrayList<>();
         try {
             PreparedStatement st = connection.prepareStatement(query);
             for (int i = 0; i < paramArgs.length; i++) {

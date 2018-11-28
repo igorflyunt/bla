@@ -6,5 +6,5 @@ import com.softserve.librarymanager.model.BookShelf;
 import java.util.List;
 
 public interface BookShelfDao extends Dao<BookShelf> {
-    List<Book> getBooksByShelfName(String shelfName);
+    List<Book> getBooksByShelfNameAndAuthorId(String shelfName, int authorId);
 }
