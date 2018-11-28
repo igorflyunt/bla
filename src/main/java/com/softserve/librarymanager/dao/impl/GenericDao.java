@@ -98,7 +98,7 @@ public abstract class GenericDao<E extends AbstractEntity> implements Dao<E> {
     protected <T extends AbstractEntity> T selectOne(String query, EntityMapper<T> entityMapper, Object... paramArgs) {
         T entity = null;
         try {
-            PreparedStatement st = connection.prepareStatement(query);
+            PreparedStatement st = DataSource.getDbConnection().prepareStatement(query);
             for (int i = 0; i < paramArgs.length; i++) {
                 Object paramArg = paramArgs[i];
                 st.setObject(i + 1, paramArg);
