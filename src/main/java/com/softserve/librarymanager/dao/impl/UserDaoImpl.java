@@ -5,12 +5,13 @@ import com.softserve.librarymanager.dao.mapper.BookMapper;
 import com.softserve.librarymanager.dao.mapper.EntityMapper;
 import com.softserve.librarymanager.dao.mapper.UserMapper;
 import com.softserve.librarymanager.dao.table.TableDefinition;
+import com.softserve.librarymanager.db.JDBCQuery;
 import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.model.User;
 
 import java.util.List;
 
-public class UserDaoImpl extends GenericDao<User> implements UserDao {
+public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     private static final String SQL_INSERT_USER = "insert into user (first_name, last_name, role, username, password)"
                                                   + " values (?, ?, ?, ?, ?)";
     private static final String SQL_SELECT_BOOKS_BY_USER_ID = "select b.* from book b"
@@ -29,17 +30,17 @@ public class UserDaoImpl extends GenericDao<User> implements UserDao {
 
     @Override
     public User findUserByUsername(String username) {
-        return selectOne(SQL_SELECT_USER_BY_USERNAME, new UserMapper(), username);
+        return JDBCQuery.selectOne(SQL_SELECT_USER_BY_USERNAME, new UserMapper(), username);
     }
 
     @Override
     public List<Book> findBooksByUserId(int userId) {
-        return selectMany(SQL_SELECT_BOOKS_BY_USER_ID, new BookMapper("b"), userId);
+        return JDBCQuery.selectMany(SQL_SELECT_BOOKS_BY_USER_ID, new BookMapper("b"), userId);
     }
 
     @Override
     public void save(User entity) {
-        save(entity, SQL_INSERT_USER, entity.getFirstName(), entity.getLastName(), entity.getRole(),
+        JDBCQuery.update(entity, SQL_INSERT_USER, entity.getFirstName(), entity.getLastName(), entity.getRole(),
                 entity.getUsername(),
                 entity.getPassword());
     }

@@ -6,12 +6,13 @@ import com.softserve.librarymanager.dao.mapper.BookMapper;
 import com.softserve.librarymanager.dao.mapper.BookShelfMapper;
 import com.softserve.librarymanager.dao.mapper.EntityMapper;
 import com.softserve.librarymanager.dao.table.TableDefinition;
+import com.softserve.librarymanager.db.JDBCQuery;
 import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.model.BookShelf;
 
 import java.util.List;
 
-public class BookShelfDaoImpl extends GenericDao<BookShelf> implements BookShelfDao, Dao<BookShelf> {
+public class BookShelfDaoImpl extends AbstractDao<BookShelf> implements BookShelfDao, Dao<BookShelf> {
     private static final String SQL_INSERT_SHELF = "insert into book_shelf (user_id, book_id, shelf_name)"
                                                    + "values(?, ?, ?)"
                                                    + "ON DUPLICATE KEY UPDATE shelf_name";
@@ -29,11 +30,11 @@ public class BookShelfDaoImpl extends GenericDao<BookShelf> implements BookShelf
 
     @Override
     public List<Book> getBooksByShelfNameAndAuthorId(String shelfName, int authorId) {
-        return selectMany(SQL_SELECT_SHELF, new BookMapper("b"), shelfName, authorId);
+        return JDBCQuery.selectMany(SQL_SELECT_SHELF, new BookMapper("b"), shelfName, authorId);
     }
 
     @Override
     public void save(BookShelf entity) {
-        save(entity, SQL_INSERT_SHELF, entity.getAuthorId(), entity.getBookId(), entity.getBookShelfName());
+        JDBCQuery.update(entity, SQL_INSERT_SHELF, entity.getAuthorId(), entity.getBookId(), entity.getBookShelfName());
     }
 }

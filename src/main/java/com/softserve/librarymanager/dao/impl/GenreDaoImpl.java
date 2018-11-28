@@ -7,13 +7,14 @@ import com.softserve.librarymanager.dao.mapper.GenreMapper;
 import com.softserve.librarymanager.dao.table.Table;
 import com.softserve.librarymanager.dao.table.TableDefinition;
 import com.softserve.librarymanager.dao.table.column.GenreColumns;
+import com.softserve.librarymanager.db.JDBCQuery;
 import com.softserve.librarymanager.model.Author;
 import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.model.Genre;
 
 import java.util.List;
 
-public class GenreDaoImpl extends GenericDao<Genre> implements GenreDao, Dao<Genre> {
+public class GenreDaoImpl extends AbstractDao<Genre> implements GenreDao, Dao<Genre> {
     private static final String genreAlias = Table.GENRE.alias();
     private static final String genreAuthorAlias = Table.GENRE_AUTHOR.alias();
     private static final String genreBookAlias = Table.GENRE_BOOK.alias();
@@ -47,31 +48,31 @@ public class GenreDaoImpl extends GenericDao<Genre> implements GenreDao, Dao<Gen
 
     @Override
     public List<Genre> findGenresByBookId(int bookId) {
-        return selectMany(SQL_SELECT_GENRES_BY_BOOK_ID, new GenreMapper(genreAlias), bookId);
+        return JDBCQuery.selectMany(SQL_SELECT_GENRES_BY_BOOK_ID, new GenreMapper(genreAlias), bookId);
     }
 
     @Override
     public List<Genre> findGenresByAuthorId(int authorId) {
-        return selectMany(SQL_SELECT_GENRES_BY_AUTHOR_ID, new GenreMapper(genreAuthorAlias), authorId);
+        return JDBCQuery.selectMany(SQL_SELECT_GENRES_BY_AUTHOR_ID, new GenreMapper(genreAuthorAlias), authorId);
     }
 
     @Override
     public void saveAuthorGenre(Genre genre, Author author) {
-        save(null, SQL_INSERT_GENRE_INTO_AUTHOR, genre.getId(), author.getId());
+        JDBCQuery.update(null, SQL_INSERT_GENRE_INTO_AUTHOR, genre.getId(), author.getId());
     }
 
     @Override
     public void saveBookGenre(Genre genre, Book book) {
-        save(null, SQL_INSERT_GENRE_INTO_BOOK, genre.getId(), book.getId());
+        JDBCQuery.update(null, SQL_INSERT_GENRE_INTO_BOOK, genre.getId(), book.getId());
     }
 
     @Override
     public void save(Genre entity) {
         int genreId = entity.getId();
         if (entityExists(genreId)) {
-            save(entity, SQL_UPDATE_GENRE, genreId);
+            JDBCQuery.update(entity, SQL_UPDATE_GENRE, genreId);
         } else {
-            save(entity, SQL_INSERT_GENRE, entity.getGenreName());
+            JDBCQuery.update(entity, SQL_INSERT_GENRE, entity.getGenreName());
         }
     }
 }

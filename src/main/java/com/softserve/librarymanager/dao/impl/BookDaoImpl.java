@@ -6,11 +6,12 @@ import com.softserve.librarymanager.dao.mapper.BookMapper;
 import com.softserve.librarymanager.dao.table.Table;
 import com.softserve.librarymanager.dao.table.TableDefinition;
 import com.softserve.librarymanager.dao.table.column.BookColumns;
+import com.softserve.librarymanager.db.JDBCQuery;
 import com.softserve.librarymanager.model.Book;
 
 import java.util.List;
 
-public class BookDaoImpl extends GenericDao<Book> implements BookDao, Dao<Book> {
+public class BookDaoImpl extends AbstractDao<Book> implements BookDao, Dao<Book> {
     private static final String bookAlias = Table.BOOK.alias();
     private static final String authorAlias = Table.AUTHOR_BOOK.alias();
 
@@ -43,32 +44,32 @@ public class BookDaoImpl extends GenericDao<Book> implements BookDao, Dao<Book> 
 
     @Override
     public List<Book> findAllBooksByAuthorId(int authorId) {
-        return selectMany(SQL_SELECT_BOOKS_BY_AUTHOR_ID, new BookMapper(bookAlias), authorId);
+        return JDBCQuery.selectMany(SQL_SELECT_BOOKS_BY_AUTHOR_ID, new BookMapper(bookAlias), authorId);
     }
 
     @Override
     public List<Book> findTenLatestBooks() {
-        return selectMany(SQL_SELECT_TEN_LATEST_BOOKS, new BookMapper());
+        return JDBCQuery.selectMany(SQL_SELECT_TEN_LATEST_BOOKS, new BookMapper());
     }
 
     @Override
     public void mapBookToAuthor(int bookId, int authorId) {
         if (authorHasNoBook(authorId))
-            save(null, SQL_INSERT_BOOK_INTO_AUTHOR, authorId, bookId);
+            JDBCQuery.update(null, SQL_INSERT_BOOK_INTO_AUTHOR, authorId, bookId);
     }
 
     private boolean authorHasNoBook(int bookId) {
-        return !execute(SQL_AUTHOR_HAS_BOOK, bookId);
+        return !JDBCQuery.execute(SQL_AUTHOR_HAS_BOOK, bookId);
     }
 
     @Override
     public void save(Book entity) {
         int bookId = entity.getId();
         if (entityExists(bookId)) {
-            save(entity, SQL_UPDATE_BOOK, entity.getName(), entity.getDescription(),
+            JDBCQuery.update(entity, SQL_UPDATE_BOOK, entity.getName(), entity.getDescription(),
                     entity.getFirstPublished(), bookId);
         } else {
-            save(entity, SQL_INSERT_BOOK, entity.getName(), entity.getDescription(),
+            JDBCQuery.update(entity, SQL_INSERT_BOOK, entity.getName(), entity.getDescription(),
                     entity.getFirstPublished());
         }
     }

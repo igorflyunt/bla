@@ -7,11 +7,12 @@ import com.softserve.librarymanager.dao.mapper.EntityMapper;
 import com.softserve.librarymanager.dao.table.Table;
 import com.softserve.librarymanager.dao.table.TableDefinition;
 import com.softserve.librarymanager.dao.table.column.AuthorColumns;
+import com.softserve.librarymanager.db.JDBCQuery;
 import com.softserve.librarymanager.model.Author;
 
 import java.util.List;
 
-public class AuthorDaoImpl extends GenericDao<Author> implements AuthorDao, Dao<Author> {
+public class AuthorDaoImpl extends AbstractDao<Author> implements AuthorDao, Dao<Author> {
     private static final String authorBookAlias = Table.AUTHOR_BOOK.alias();
     private static final String authorAlias = Table.AUTHOR.alias();
 
@@ -36,18 +37,18 @@ public class AuthorDaoImpl extends GenericDao<Author> implements AuthorDao, Dao<
 
     @Override
     public List<Author> findAuthorsByBookId(int bookId) {
-        return selectMany(SQL_SELECT_AUTHORS_BY_BOOK_ID, new AuthorMapper(authorAlias), bookId);
+        return JDBCQuery.selectMany(SQL_SELECT_AUTHORS_BY_BOOK_ID, new AuthorMapper(authorAlias), bookId);
     }
 
     @Override
     public void save(Author entity) {
         int authorId = entity.getId();
         if (entityExists(authorId)) {
-            save(entity, SQL_UPDATE_AUTHOR, entity.getFirstName(), entity.getLastName(), entity.getBirthDate(),
+            JDBCQuery.update(entity, SQL_UPDATE_AUTHOR, entity.getFirstName(), entity.getLastName(), entity.getBirthDate(),
                     entity.getBiography(),
                     authorId);
         } else {
-            save(entity, SQL_INSERT_AUTHOR, entity.getFirstName(), entity.getLastName(), entity.getBirthDate(),
+            JDBCQuery.update(entity, SQL_INSERT_AUTHOR, entity.getFirstName(), entity.getLastName(), entity.getBirthDate(),
                     entity.getBiography());
         }
     }
