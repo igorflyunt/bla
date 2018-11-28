@@ -1,10 +1,9 @@
-package com.softserve.librarymanager.servlet.user;
+package com.softserve.librarymanager.servlet;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.service.BookService;
-import com.softserve.librarymanager.service.BookServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +15,7 @@ import java.util.List;
 
 @WebServlet("")
 @Singleton
-public class LatestBooksView extends HttpServlet {
+public class LatestBooksServlet extends HttpServlet {
     @Inject
     private BookService bookService;
 
