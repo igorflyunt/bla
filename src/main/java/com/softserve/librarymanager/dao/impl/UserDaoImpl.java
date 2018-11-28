@@ -34,7 +34,7 @@ public class UserDaoImpl extends GenericDao<User> implements UserDao {
 
     @Override
     public List<Book> findBooksByUserId(int userId) {
-        return selectMany(SQL_SELECT_BOOKS_BY_USER_ID, new BookMapper(), userId);
+        return selectMany(SQL_SELECT_BOOKS_BY_USER_ID, new BookMapper("b"), userId);
     }
 
     @Override
