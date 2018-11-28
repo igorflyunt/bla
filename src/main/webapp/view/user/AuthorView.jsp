@@ -50,10 +50,9 @@
                                     Want to read
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Want to read</a>
-                                    <a class="dropdown-item" href="#">Read</a>
-                                    <a class="dropdown-item" href="#">Currently reading</a>
-                                    <a class="dropdown-item" href="#">To read</a>
+                                    <a class="dropdown-item" href="/user/bookshelf?shelf=to-read">Want to read</a>
+                                    <a class="dropdown-item" href="/user/bookshelf?shelf=read">Read</a>
+                                    <a class="dropdown-item" href="/user/bookshelf?shelf=currently-reading">Currently reading</a>
                                 </div>
                             </div>
                         </div>
