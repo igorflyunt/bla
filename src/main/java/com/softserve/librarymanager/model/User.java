@@ -18,12 +18,8 @@ public class User extends Person {
         return books;
     }
 
-    public UserRole getRole() {
-        return role;
-    }
-
-    public void addBook(Book book) {
-        this.books.add(book);
+    public String getRole() {
+        return role.name();
     }
 
     public void setRole(UserRole role) {

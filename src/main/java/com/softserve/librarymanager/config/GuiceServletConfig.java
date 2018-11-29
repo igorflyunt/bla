@@ -4,6 +4,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
+import com.softserve.librarymanager.security.AuthenticationFilter;
 import com.softserve.librarymanager.servlet.admin.AdminBooks;
 import com.softserve.librarymanager.servlet.admin.AdminHome;
 import com.softserve.librarymanager.servlet.admin.EditAuthor;
@@ -29,6 +30,7 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                 serve("/user/bookshelf").with(UserBookshelfServlet.class);
                 serve("/user/auth/signup").with(UserSignUpServlet.class);
                 serve("/user/auth/signin").with(UserSignInServlet.class);
+                filter("/user/bookshelf").through(AuthenticationFilter.class);
             }
         }, new ServiceModule(), new DaoModule());
     }

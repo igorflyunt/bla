@@ -18,9 +18,7 @@
                         <button class="btn btn-secondary btn-sm float-right"
                                 type="button" data-toggle="collapse" data-target="#newBook${author.id}"
                                 aria-expanded="false" aria-controls="newBook${author.id}">Add book</button>
-                        <a href="/admin/book?authorId=${author.id}">
-                            <button class="btn btn-secondary btn-sm float-right" type="button">Books</button>
-                        </a>
+                            <a class="btn btn-secondary btn-sm float-right" href="/admin/book?authorId=${author.id}" >Books</a>
                         <button class="btn btn-danger btn-sm float-right" id="deleteAuthor${author.id}" name="authorId"
                                 value="${author.id}"
                                 type="button">

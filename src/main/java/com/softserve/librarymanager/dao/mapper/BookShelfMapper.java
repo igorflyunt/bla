@@ -1,21 +1,31 @@
 package com.softserve.librarymanager.dao.mapper;
 
+import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.model.BookShelf;
+import com.softserve.librarymanager.model.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static com.softserve.librarymanager.model.BookShelf.BookShelves;
+public class BookShelfMapper extends AbstractMapper<BookShelf> implements EntityMapper<BookShelf> {
+    public BookShelfMapper() {
+    }
 
-public class BookShelfMapper implements EntityMapper<BookShelf> {
+    public BookShelfMapper(String columnAlias) {
+        super(columnAlias);
+    }
+
     @Override
     public BookShelf mapToEntity(ResultSet resultSet) throws SQLException {
         BookShelf bookShelf = new BookShelf();
-        final BookShelves shelfName = BookShelves.valueOf(resultSet.getString("shelf_name"));
-        bookShelf.setId(resultSet.getInt("id"));
-        bookShelf.setAuthorId(resultSet.getInt("authorId"));
-        bookShelf.setBookId(resultSet.getInt("bookId"));
-        bookShelf.setStatus(shelfName);
+        String shelfName = resultSet.getString("shelf_name");
+        Book book = new Book();
+        User user = new User();
+        book.setId(resultSet.getInt("book_id"));
+        user.setId(resultSet.getInt("user_id"));
+        bookShelf.setBook(book);
+        bookShelf.setUser(user);
+        bookShelf.setBookShelfName(shelfName);
         return bookShelf;
     }
 }

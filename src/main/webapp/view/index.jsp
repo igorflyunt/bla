@@ -28,9 +28,15 @@
                                     Want to read
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="/user/bookshelf?shelf=to-read">Want to read</a>
-                                    <a class="dropdown-item" href="/user/bookshelf?shelf=read">Read</a>
-                                    <a class="dropdown-item" href="/user/bookshelf?shelf=currently-reading">Currently reading</a>
+                                    <form  method="post" action="/user/bookshelf" >
+                                        <input type="hidden" name="bookId" value="${book.id}">
+                                        <button type="submit" class="btn btn-secondary btn-sm dropdown-item" value="to-read"
+                                                name="shelf">Want to read</button>
+                                        <button type="submit" class="btn btn-secondary btn-sm dropdown-item" value="read"
+                                                name="shelf">Read</button>
+                                        <button type="submit" class="btn btn-secondary btn-sm dropdown-item" value="currently-reading"
+                                                name="shelf">Currently reading</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

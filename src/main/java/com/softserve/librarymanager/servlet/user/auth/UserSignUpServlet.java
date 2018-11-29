@@ -1,6 +1,9 @@
 package com.softserve.librarymanager.servlet.user.auth;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.softserve.librarymanager.dao.UserDao;
+import com.softserve.librarymanager.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +15,23 @@ import java.io.IOException;
 @WebServlet("/user/auth/signup")
 @Singleton
 public class UserSignUpServlet extends HttpServlet {
+    @Inject
+    UserDao userDao;
+
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {
-
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        User user = new User();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setUsername(username);
+        user.setPassword(password);
+        userDao.saveOrUpdate(user);
+        response.sendRedirect("/user/auth/signin");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

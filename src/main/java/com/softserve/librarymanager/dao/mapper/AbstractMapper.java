@@ -5,10 +5,10 @@ public abstract class AbstractMapper<E> implements EntityMapper<E> {
 
     protected String columnAlias = DEFAULT_EMPTY_ALIAS;
 
-    protected AbstractMapper() {
+    public AbstractMapper() {
     }
 
-    protected AbstractMapper(String columnAlias) {
+    public AbstractMapper(String columnAlias) {
         this.columnAlias = columnAlias;
     }
 }

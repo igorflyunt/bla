@@ -1,10 +1,11 @@
 package com.softserve.librarymanager.dao;
 
-import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.model.BookShelf;
 
 import java.util.List;
 
 public interface BookShelfDao extends Dao<BookShelf> {
-    List<Book> getBooksByShelfNameAndAuthorId(String shelfName, int authorId);
+    List<BookShelf> findShelfByNameAndUserId(String shelfName, int userId);
+
+    List<BookShelf> findAllShelvesByUserId(int userId);
 }

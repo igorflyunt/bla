@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row my-4">
         <div class="col-lg-4 mx-auto">
-            <form>
+            <form method="post" action="/user/auth/signin">
                 <div class="form-group"><input type="text" class="form-control" name="username" placeholder="Username"></div>
                 <div class="form-group"><input type="password" class="form-control" name="password" placeholder="Password"></div>
                 <button type="submit" name="signin" class="btn btn-secondary btn-sm">Sign in</button>

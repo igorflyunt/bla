@@ -55,12 +55,7 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao, Dao<Book>
 
     @Override
     public void mapBookToAuthor(int bookId, int authorId) {
-        if (authorHasNoBook(authorId))
-            JDBCQuery.update(null, SQL_INSERT_BOOK_INTO_AUTHOR, authorId, bookId);
-    }
-
-    private boolean authorHasNoBook(int bookId) {
-        return !JDBCQuery.execute(SQL_AUTHOR_HAS_BOOK, bookId);
+        JDBCQuery.update(null, SQL_INSERT_BOOK_INTO_AUTHOR, authorId, bookId);
     }
 
     @Override

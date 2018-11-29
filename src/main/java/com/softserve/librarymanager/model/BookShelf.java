@@ -1,46 +1,40 @@
 package com.softserve.librarymanager.model;
 
 public class BookShelf extends AbstractEntity {
-    public enum BookShelves {
-        READ ("read"),
-        CURRENTLY_READING ("currently-reading"),
-        TO_READ ("to-read");
+    private Book book;
+    private User user;
 
-        private String bookShelfName;
-
-        BookShelves(String bookShelfName) {
-            this.bookShelfName = bookShelfName;
-        }
-    }
-
-    private int authorId;
-    private int bookId;
-
-    private BookShelves status;
+    private String bookShelfName;
 
     public BookShelf() { }
 
     public String getBookShelfName() {
-        return status.bookShelfName;
+        return bookShelfName;
     }
 
-    public void setStatus(BookShelves status) {
-        this.status = status;
+    public void setBookShelfName(String bookShelfName) {
+        this.bookShelfName = bookShelfName;
     }
 
-    public int getAuthorId() {
-        return authorId;
+    public Book getBook() {
+        return book;
     }
 
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
-    public int getBookId() {
-        return bookId;
+    public User getUser() {
+        return user;
     }
 
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "BookShelf{" + "book=" + book + ", user=" + user + ", bookShelfName='" + bookShelfName + '\'' + "} "
+               + super.toString();
     }
 }

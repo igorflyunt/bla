@@ -28,10 +28,10 @@ public class EditBook extends HttpServlet {
     private BookService bookService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int authorId = getIdParemeterIfExists(request.getParameter("authorId"));
+        int authorId = getIdParameterIfExists(request.getParameter("authorId"));
         String bookName = request.getParameter("bookName");
         String bookDescription = request.getParameter("bookDescription");
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Book book = new Book();
         setEntityIdIfExists(request.getParameter("bookId"), book);
         book.setBookName(bookName);
@@ -43,7 +43,8 @@ public class EditBook extends HttpServlet {
             e.printStackTrace();
         }
         bookService.save(book);
-        bookService.mapBookToAuthor(book.getId(), authorId);
+        if (authorId != AbstractEntity.NO_ELEMENT)
+            bookService.mapBookToAuthor(book.getId(), authorId);
         response.sendRedirect("/admin/books");
     }
 
@@ -55,7 +56,7 @@ public class EditBook extends HttpServlet {
         request.getRequestDispatcher("/view/admin/BookEditor.jsp").forward(request, response);
     }
 
-    private int getIdParemeterIfExists(String stringParam) {
+    private int getIdParameterIfExists(String stringParam) {
         if (stringParam == null || stringParam.isEmpty())
             return AbstractEntity.NO_ELEMENT;
         return Integer.parseInt(stringParam);

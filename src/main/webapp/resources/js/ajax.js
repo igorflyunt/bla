@@ -1,4 +1,4 @@
-$(document).ready(deleteAuthor());
+$(document).ready(deleteAuthor())
 $(document).ready(deleteBook())
 
 function deleteAuthor () {

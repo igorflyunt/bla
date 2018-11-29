@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row my-4">
         <div class="col-lg-4 mx-auto">
-            <form>
+            <form method="post" action="/user/auth/signup">
                 <div class="form-group"><input type="text" class="form-control" name="firstName" placeholder="First Name"></div>
                 <div class="form-group"><input type="text" class="form-control" name="lastName" placeholder="Last Name"></div>
                 <div class="form-group"><input type="text" class="form-control" name="username" placeholder="Username"></div>
