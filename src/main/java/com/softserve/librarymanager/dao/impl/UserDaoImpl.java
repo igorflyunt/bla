@@ -2,9 +2,9 @@ package com.softserve.librarymanager.dao.impl;
 
 import com.softserve.librarymanager.dao.AbstractDao;
 import com.softserve.librarymanager.dao.UserDao;
-import com.softserve.librarymanager.dao.mapper.BookMapper;
 import com.softserve.librarymanager.dao.mapper.EntityMapper;
-import com.softserve.librarymanager.dao.mapper.UserMapper;
+import com.softserve.librarymanager.dao.mapper.impl.BookMapper;
+import com.softserve.librarymanager.dao.mapper.impl.UserMapper;
 import com.softserve.librarymanager.dao.table.TableDefinition;
 import com.softserve.librarymanager.db.JDBCQuery;
 import com.softserve.librarymanager.model.Book;

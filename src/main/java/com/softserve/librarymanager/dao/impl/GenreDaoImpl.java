@@ -4,7 +4,7 @@ import com.softserve.librarymanager.dao.AbstractDao;
 import com.softserve.librarymanager.dao.Dao;
 import com.softserve.librarymanager.dao.GenreDao;
 import com.softserve.librarymanager.dao.mapper.EntityMapper;
-import com.softserve.librarymanager.dao.mapper.GenreMapper;
+import com.softserve.librarymanager.dao.mapper.impl.GenreMapper;
 import com.softserve.librarymanager.dao.table.Table;
 import com.softserve.librarymanager.dao.table.TableDefinition;
 import com.softserve.librarymanager.db.JDBCQuery;

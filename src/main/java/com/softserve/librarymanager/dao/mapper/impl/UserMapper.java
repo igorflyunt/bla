@@ -1,5 +1,6 @@
-package com.softserve.librarymanager.dao.mapper;
+package com.softserve.librarymanager.dao.mapper.impl;
 
+import com.softserve.librarymanager.dao.mapper.EntityMapper;
 import com.softserve.librarymanager.model.User;
 
 import java.sql.ResultSet;
