@@ -6,7 +6,8 @@ import com.softserve.librarymanager.dao.GenreDao;
 import com.softserve.librarymanager.dao.mapper.EntityMapper;
 import com.softserve.librarymanager.dao.mapper.impl.GenreMapper;
 import com.softserve.librarymanager.dao.table.Table;
-import com.softserve.librarymanager.dao.table.TableDefinition;
+import com.softserve.librarymanager.dao.table.TablePrimaryKeyPair;
+import com.softserve.librarymanager.dao.table.TablePrimaryKeyPairs;
 import com.softserve.librarymanager.db.JDBCQuery;
 import com.softserve.librarymanager.model.Author;
 import com.softserve.librarymanager.model.Book;
@@ -39,11 +40,11 @@ public class GenreDaoImpl extends AbstractDao<Genre> implements GenreDao, Dao<Ge
             genreAlias, genreAlias, genreBookAlias, genreAlias, genreBookAlias, genreBookAlias);
 
     public GenreDaoImpl() {
-        this(new TableDefinition(Table.GENRE.table(), "id"), new GenreMapper());
+        this(TablePrimaryKeyPairs.GENRE, new GenreMapper());
     }
 
-    private GenreDaoImpl(TableDefinition tableDefinition, EntityMapper<Genre> entityMapper) {
-        super(tableDefinition, entityMapper);
+    private GenreDaoImpl(TablePrimaryKeyPair tablePrimaryKeyPair, EntityMapper<Genre> entityMapper) {
+        super(tablePrimaryKeyPair, entityMapper);
     }
 
     @Override

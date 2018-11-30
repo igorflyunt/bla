@@ -5,7 +5,8 @@ import com.softserve.librarymanager.dao.UserDao;
 import com.softserve.librarymanager.dao.mapper.EntityMapper;
 import com.softserve.librarymanager.dao.mapper.impl.BookMapper;
 import com.softserve.librarymanager.dao.mapper.impl.UserMapper;
-import com.softserve.librarymanager.dao.table.TableDefinition;
+import com.softserve.librarymanager.dao.table.TablePrimaryKeyPair;
+import com.softserve.librarymanager.dao.table.TablePrimaryKeyPairs;
 import com.softserve.librarymanager.db.JDBCQuery;
 import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.model.User;
@@ -22,11 +23,11 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     private static final String SQL_SELECT_USER_BY_USERNAME = "select * from user where username = ?";
 
     public UserDaoImpl() {
-        this(new TableDefinition("user", "id"), new UserMapper());
+        this(TablePrimaryKeyPairs.USER, new UserMapper());
     }
 
-    private UserDaoImpl(TableDefinition tableDefinition, EntityMapper<User> entityMapper) {
-        super(tableDefinition, entityMapper);
+    private UserDaoImpl(TablePrimaryKeyPair tablePrimaryKeyPair, EntityMapper<User> entityMapper) {
+        super(tablePrimaryKeyPair, entityMapper);
     }
 
     @Override

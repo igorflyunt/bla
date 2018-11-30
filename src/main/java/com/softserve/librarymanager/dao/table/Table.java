@@ -9,20 +9,10 @@ public enum Table {
     AUTHOR_BOOK("author_book", "ab"),
     NO_TABLE("", "");
 
-    private String tableName;
     private String tableAlias;
 
     Table(String tableName, String tableAlias) {
-        this.tableName = tableName;
         this.tableAlias = tableAlias;
-    }
-
-    public String table() {
-        return this.tableName;
-    }
-
-    public String aliasedTable() {
-        return String.format("%s %s", tableName, tableAlias);
     }
 
     public String alias() {
