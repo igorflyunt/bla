@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public abstract class AbstractDao<E extends AbstractEntity> implements Dao<E> {
-    private EntityMapper<E>     entityMapper;
+    private EntityMapper<E> entityMapper;
     private TablePrimaryKeyPair tablePrimaryKeyPair;
 
     protected AbstractDao(TablePrimaryKeyPair tablePrimaryKeyPair, EntityMapper<E> entityMapper) {
