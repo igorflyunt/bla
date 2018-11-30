@@ -14,8 +14,7 @@ public final class JDBCQuery {
 
     private JDBCQuery() {}
 
-    public static <T> T selectOne(String query, EntityMapper<T> entityMapper,
-                                                          Object... paramArgs) {
+    public static <T> T selectOne(String query, EntityMapper<T> entityMapper, Object... paramArgs) {
         T entity = null;
         try {
             PreparedStatement st = setupPreparedStatement(query, paramArgs);
@@ -29,8 +28,7 @@ public final class JDBCQuery {
         return entity;
     }
 
-    public static <T> List<T> selectMany(String query, EntityMapper<T> entityMapper,
-                                                                Object... paramArgs) {
+    public static <T> List<T> selectMany(String query, EntityMapper<T> entityMapper, Object... paramArgs) {
         List<T> entities = new ArrayList<>();
         try {
             PreparedStatement st = setupPreparedStatement(query, paramArgs);
