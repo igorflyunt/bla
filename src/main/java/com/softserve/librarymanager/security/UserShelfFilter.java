@@ -10,9 +10,9 @@ import java.io.IOException;
 
 @WebFilter("/user/bookshelf")
 @Singleton
-public class AuthenticationFilter implements Filter {
+public class UserShelfFilter implements Filter {
     @Inject
-    UserSession userSession;
+    private UserSession userSession;
     public void destroy() {
     }
 
