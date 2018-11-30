@@ -3,6 +3,7 @@ package com.softserve.librarymanager.servlet.user;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.softserve.librarymanager.service.AuthorService;
+import com.softserve.librarymanager.servlet.Jsp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +26,6 @@ public class AuthorDetailsServlet extends HttpServlet {
             throws ServletException, IOException {
         int authorId = Integer.parseInt(request.getParameter("authorId"));
         authorService.findById(authorId).ifPresent(author -> request.setAttribute("author", author));
-        request.getRequestDispatcher("view/user/AuthorView.jsp").forward(request, response);
+        request.getRequestDispatcher(Jsp.AUTHOR_VIEW).forward(request, response);
     }
 }

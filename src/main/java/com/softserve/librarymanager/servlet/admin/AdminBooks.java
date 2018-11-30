@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.service.BookService;
+import com.softserve.librarymanager.servlet.Jsp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +29,6 @@ public class AdminBooks extends HttpServlet {
             throws ServletException, IOException {
         final List<Book> books = bookService.findAll();
         request.setAttribute("books", books);
-        request.getRequestDispatcher("/view/admin/BooksEditor.jsp").forward(request, response);
+        request.getRequestDispatcher(Jsp.BOOKS_EDITOR_VIEW).forward(request, response);
     }
 }

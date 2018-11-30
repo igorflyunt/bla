@@ -6,6 +6,7 @@ import com.softserve.librarymanager.model.AbstractEntity;
 import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.service.AuthorService;
 import com.softserve.librarymanager.service.BookService;
+import com.softserve.librarymanager.servlet.Jsp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,7 +54,7 @@ public class EditBook extends HttpServlet {
         int authorId = Integer.parseInt(request.getParameter("authorId"));
         List<Book> books = bookService.findBooksByAuthorId(authorId);
         request.setAttribute("books", books);
-        request.getRequestDispatcher("/view/admin/BookEditor.jsp").forward(request, response);
+        request.getRequestDispatcher(Jsp.BOOK_EDITOR_VIEW).forward(request, response);
     }
 
     private int getIdParameterIfExists(String stringParam) {

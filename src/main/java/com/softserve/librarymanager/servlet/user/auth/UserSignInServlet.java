@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.softserve.librarymanager.dao.UserDao;
 import com.softserve.librarymanager.security.UserSession;
+import com.softserve.librarymanager.servlet.Jsp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,6 +33,6 @@ public class UserSignInServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/view/user/auth/UserSignInView.jsp").forward(request, response);
+        request.getRequestDispatcher(Jsp.USER_SIGN_IN_VIEW).forward(request, response);
     }
 }

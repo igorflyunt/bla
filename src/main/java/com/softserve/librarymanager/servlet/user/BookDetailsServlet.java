@@ -3,6 +3,7 @@ package com.softserve.librarymanager.servlet.user;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.softserve.librarymanager.service.BookService;
+import com.softserve.librarymanager.servlet.Jsp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +24,6 @@ public class BookDetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int bookid = Integer.parseInt(request.getParameter("bookid"));
         bookService.findById(bookid).ifPresent(b-> request.setAttribute("book", b));
-        request.getRequestDispatcher("view/user/BookView.jsp").forward(request, response);
+        request.getRequestDispatcher(Jsp.BOOK_DETAILS_VIEW).forward(request, response);
     }
 }

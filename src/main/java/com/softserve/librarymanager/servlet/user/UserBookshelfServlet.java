@@ -7,6 +7,7 @@ import com.softserve.librarymanager.model.User;
 import com.softserve.librarymanager.security.UserSession;
 import com.softserve.librarymanager.service.BookService;
 import com.softserve.librarymanager.service.BookShelfService;
+import com.softserve.librarymanager.servlet.Jsp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -54,7 +55,7 @@ public class UserBookshelfServlet extends HttpServlet {
         request.setAttribute("shelfName", viewShelfNameMap.get(paramShelfName));
         setupButtonShelfName(request, shelf);
         request.setAttribute("shelfList", shelf);
-        request.getRequestDispatcher("/view/user/Bookshelves.jsp").forward(request, response);
+        request.getRequestDispatcher(Jsp.USER_SHELF_VIEW).forward(request, response);
     }
 
     private void setupButtonShelfName(HttpServletRequest request, List<BookShelf> shelfList) {

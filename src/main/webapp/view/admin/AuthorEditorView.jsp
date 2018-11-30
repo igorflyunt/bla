@@ -6,8 +6,8 @@
 <body>
 <jsp:include page="../../layout/adminnavbar.jsp"/>
 <div class="container-fluid" id="author-list">
-    <jsp:include page="AddAuthor.jsp"/>
-    <jsp:include page="EditAuthor.jsp"/>
+    <jsp:include page="AddAuthorView.jsp"/>
+    <jsp:include page="EditAuthorView.jsp"/>
 </div>
 </body>
 </html>

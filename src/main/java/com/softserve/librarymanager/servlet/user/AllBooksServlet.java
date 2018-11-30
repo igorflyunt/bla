@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.softserve.librarymanager.model.Book;
 import com.softserve.librarymanager.service.BookService;
+import com.softserve.librarymanager.servlet.Jsp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,6 +30,6 @@ public class AllBooksServlet extends HttpServlet {
         List<Book> books = bookService.findAll();
         request.setAttribute("books", books);
         request.setAttribute("indexPageName", "All books");
-        request.getRequestDispatcher("/view/index.jsp").forward(request, response);
+        request.getRequestDispatcher(Jsp.INDEX_VIEW).forward(request, response);
     }
 }

@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 import com.softserve.librarymanager.model.AbstractEntity;
 import com.softserve.librarymanager.model.Author;
 import com.softserve.librarymanager.service.AuthorService;
+import com.softserve.librarymanager.servlet.Jsp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,7 +47,7 @@ public class EditAuthor extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Author> authors = authorService.findAll();
         request.setAttribute("authors", authors);
-        request.getRequestDispatcher("/view/admin/AuthorEditor.jsp").forward(request, response);
+        request.getRequestDispatcher(Jsp.AUTHOR_EDITOR_VIEW).forward(request, response);
     }
 
     @Override
