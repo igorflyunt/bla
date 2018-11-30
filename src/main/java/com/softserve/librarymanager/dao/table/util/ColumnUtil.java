@@ -6,7 +6,7 @@ public final class ColumnUtil {
     private ColumnUtil() {
     }
 
-    public static String addAliasIfProvided(String column, String alias) {
+    public static String prependAliasIfNotEmpty(String column, String alias) {
         if (alias.isEmpty())
             return column;
         return String.format(ALIAS_FORMAT, alias, column);

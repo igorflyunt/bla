@@ -7,7 +7,7 @@ import com.softserve.librarymanager.model.Genre;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static com.softserve.librarymanager.dao.table.util.ColumnUtil.addAliasIfProvided;
+import static com.softserve.librarymanager.dao.table.util.ColumnUtil.prependAliasIfNotEmpty;
 
 public class GenreMapper extends AbstractMapper<Genre> implements EntityMapper<Genre> {
     public GenreMapper() {
@@ -20,8 +20,8 @@ public class GenreMapper extends AbstractMapper<Genre> implements EntityMapper<G
     @Override
     public Genre mapToEntity(ResultSet resultSet) throws SQLException {
         Genre genre = new Genre();
-        genre.setId(resultSet.getInt(addAliasIfProvided("id", columnAlias)));
-        genre.setGenreName(resultSet.getString(addAliasIfProvided("name", columnAlias)));
+        genre.setId(resultSet.getInt(prependAliasIfNotEmpty("id", columnAlias)));
+        genre.setGenreName(resultSet.getString(prependAliasIfNotEmpty("name", columnAlias)));
         return genre;
     }
 }
