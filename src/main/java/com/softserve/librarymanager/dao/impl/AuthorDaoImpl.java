@@ -6,7 +6,6 @@ import com.softserve.librarymanager.dao.Dao;
 import com.softserve.librarymanager.dao.mapper.EntityMapper;
 import com.softserve.librarymanager.dao.mapper.impl.AuthorMapper;
 import com.softserve.librarymanager.dao.table.TablePrimaryKeyPair;
-import com.softserve.librarymanager.dao.table.TablePrimaryKeyPairs;
 import com.softserve.librarymanager.db.JDBCQuery;
 import com.softserve.librarymanager.model.Author;
 
@@ -28,7 +27,7 @@ public class AuthorDaoImpl extends AbstractDao<Author> implements AuthorDao, Dao
             authorAlias, authorAlias, authorBookAlias, authorAlias, authorBookAlias, authorBookAlias);
 
     public AuthorDaoImpl() {
-        this(TablePrimaryKeyPairs.AUTHOR, new AuthorMapper());
+        this(TablePrimaryKeyPair.AUTHOR, new AuthorMapper());
     }
 
     private AuthorDaoImpl(TablePrimaryKeyPair tablePrimaryKeyPair, EntityMapper<Author> entityMapper) {

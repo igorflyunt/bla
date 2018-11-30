@@ -5,7 +5,6 @@ import com.softserve.librarymanager.dao.BookDao;
 import com.softserve.librarymanager.dao.Dao;
 import com.softserve.librarymanager.dao.mapper.impl.BookMapper;
 import com.softserve.librarymanager.dao.table.TablePrimaryKeyPair;
-import com.softserve.librarymanager.dao.table.TablePrimaryKeyPairs;
 import com.softserve.librarymanager.db.JDBCQuery;
 import com.softserve.librarymanager.model.Book;
 
@@ -32,7 +31,7 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao, Dao<Book>
     private static final String SQL_SELECT_TEN_LATEST_BOOKS = "select * from book order by first_published desc limit 2";
 
     public BookDaoImpl() {
-        this(TablePrimaryKeyPairs.BOOK, new BookMapper());
+        this(TablePrimaryKeyPair.BOOK, new BookMapper());
     }
 
     private BookDaoImpl(TablePrimaryKeyPair tablePrimaryKeyPair, BookMapper entityMapper) {

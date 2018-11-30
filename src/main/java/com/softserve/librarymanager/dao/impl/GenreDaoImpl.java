@@ -6,7 +6,6 @@ import com.softserve.librarymanager.dao.GenreDao;
 import com.softserve.librarymanager.dao.mapper.EntityMapper;
 import com.softserve.librarymanager.dao.mapper.impl.GenreMapper;
 import com.softserve.librarymanager.dao.table.TablePrimaryKeyPair;
-import com.softserve.librarymanager.dao.table.TablePrimaryKeyPairs;
 import com.softserve.librarymanager.db.JDBCQuery;
 import com.softserve.librarymanager.model.Author;
 import com.softserve.librarymanager.model.Book;
@@ -39,7 +38,7 @@ public class GenreDaoImpl extends AbstractDao<Genre> implements GenreDao, Dao<Ge
             genreAlias, genreAlias, genreBookAlias, genreAlias, genreBookAlias, genreBookAlias);
 
     public GenreDaoImpl() {
-        this(TablePrimaryKeyPairs.GENRE, new GenreMapper());
+        this(TablePrimaryKeyPair.GENRE, new GenreMapper());
     }
 
     private GenreDaoImpl(TablePrimaryKeyPair tablePrimaryKeyPair, EntityMapper<Genre> entityMapper) {

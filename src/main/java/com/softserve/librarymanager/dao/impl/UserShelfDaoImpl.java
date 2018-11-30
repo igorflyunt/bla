@@ -6,7 +6,6 @@ import com.softserve.librarymanager.dao.UserShelfDao;
 import com.softserve.librarymanager.dao.mapper.EntityMapper;
 import com.softserve.librarymanager.dao.mapper.impl.BookShelfMapper;
 import com.softserve.librarymanager.dao.table.TablePrimaryKeyPair;
-import com.softserve.librarymanager.dao.table.TablePrimaryKeyPairs;
 import com.softserve.librarymanager.db.JDBCQuery;
 import com.softserve.librarymanager.model.BookShelf;
 
@@ -19,7 +18,7 @@ public class UserShelfDaoImpl extends AbstractDao<BookShelf> implements UserShel
     private static final String SQL_SELECT_ALL_SHELVES = "select * from book_shelf where user_id = ?";
 
     public UserShelfDaoImpl() {
-        this(TablePrimaryKeyPairs.USER_SHELF, new BookShelfMapper());
+        this(TablePrimaryKeyPair.USER_SHELF, new BookShelfMapper());
     }
 
     private UserShelfDaoImpl(TablePrimaryKeyPair tablePrimaryKeyPair, EntityMapper<BookShelf> entityMapper) {
