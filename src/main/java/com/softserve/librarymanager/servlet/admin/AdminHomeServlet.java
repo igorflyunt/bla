@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @WebServlet("/admin")
 @Singleton
-public class AdminHome extends HttpServlet {
+public class AdminHomeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {

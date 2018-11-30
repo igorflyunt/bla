@@ -20,7 +20,7 @@ import java.util.List;
 
 @WebServlet("/admin/author")
 @Singleton
-public class EditAuthor extends HttpServlet {
+public class EditAuthorServlet extends HttpServlet {
     @Inject
     private AuthorService authorService;
 

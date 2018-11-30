@@ -21,7 +21,7 @@ import java.util.List;
 
 @WebServlet("/admin/book")
 @Singleton
-public class EditBook extends HttpServlet {
+public class EditBookServlet extends HttpServlet {
     @Inject
     private AuthorService authorService;
 
