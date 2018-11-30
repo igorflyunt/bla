@@ -5,7 +5,6 @@ import com.softserve.librarymanager.dao.AuthorDao;
 import com.softserve.librarymanager.dao.Dao;
 import com.softserve.librarymanager.dao.mapper.EntityMapper;
 import com.softserve.librarymanager.dao.mapper.impl.AuthorMapper;
-import com.softserve.librarymanager.dao.table.Table;
 import com.softserve.librarymanager.dao.table.TablePrimaryKeyPair;
 import com.softserve.librarymanager.dao.table.TablePrimaryKeyPairs;
 import com.softserve.librarymanager.db.JDBCQuery;
@@ -14,8 +13,8 @@ import com.softserve.librarymanager.model.Author;
 import java.util.List;
 
 public class AuthorDaoImpl extends AbstractDao<Author> implements AuthorDao, Dao<Author> {
-    private static final String authorBookAlias = Table.AUTHOR_BOOK.alias();
-    private static final String authorAlias = Table.AUTHOR.alias();
+    private static final String authorBookAlias = "ab";
+    private static final String authorAlias = "a";
 
     private static final String SQL_INSERT_AUTHOR = "insert into author (first_name, last_name, birth_date, biography)" +
             "values(?, ?, ?, ?)";

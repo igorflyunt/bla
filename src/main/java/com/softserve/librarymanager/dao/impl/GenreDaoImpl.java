@@ -5,7 +5,6 @@ import com.softserve.librarymanager.dao.Dao;
 import com.softserve.librarymanager.dao.GenreDao;
 import com.softserve.librarymanager.dao.mapper.EntityMapper;
 import com.softserve.librarymanager.dao.mapper.impl.GenreMapper;
-import com.softserve.librarymanager.dao.table.Table;
 import com.softserve.librarymanager.dao.table.TablePrimaryKeyPair;
 import com.softserve.librarymanager.dao.table.TablePrimaryKeyPairs;
 import com.softserve.librarymanager.db.JDBCQuery;
@@ -16,9 +15,9 @@ import com.softserve.librarymanager.model.Genre;
 import java.util.List;
 
 public class GenreDaoImpl extends AbstractDao<Genre> implements GenreDao, Dao<Genre> {
-    private static final String genreAlias = Table.GENRE.alias();
-    private static final String genreAuthorAlias = Table.GENRE_AUTHOR.alias();
-    private static final String genreBookAlias = Table.GENRE_BOOK.alias();
+    private static final String genreAlias = "g";
+    private static final String genreAuthorAlias = "ga";
+    private static final String genreBookAlias = "gb";
 
     private static final String SQL_INSERT_GENRE = "insert into genre (name) values(?)";
     private static final String SQL_INSERT_GENRE_INTO_AUTHOR = "insert into genre_author (genre_id, author_id)" +

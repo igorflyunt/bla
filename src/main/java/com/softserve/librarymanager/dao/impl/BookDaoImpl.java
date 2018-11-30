@@ -4,7 +4,6 @@ import com.softserve.librarymanager.dao.AbstractDao;
 import com.softserve.librarymanager.dao.BookDao;
 import com.softserve.librarymanager.dao.Dao;
 import com.softserve.librarymanager.dao.mapper.impl.BookMapper;
-import com.softserve.librarymanager.dao.table.Table;
 import com.softserve.librarymanager.dao.table.TablePrimaryKeyPair;
 import com.softserve.librarymanager.dao.table.TablePrimaryKeyPairs;
 import com.softserve.librarymanager.db.JDBCQuery;
@@ -13,8 +12,8 @@ import com.softserve.librarymanager.model.Book;
 import java.util.List;
 
 public class BookDaoImpl extends AbstractDao<Book> implements BookDao, Dao<Book> {
-    private static final String bookAlias = Table.BOOK.alias();
-    private static final String authorAlias = Table.AUTHOR_BOOK.alias();
+    private static final String bookAlias = "b";
+    private static final String authorBookAlias = "ab";
 
     private static final String SQL_INSERT_BOOK = "insert into book (name, description, first_published)" +
             " values (?, ?, ?)";
@@ -23,7 +22,7 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao, Dao<Book>
     private static final String SQL_AUTHOR_HAS_BOOK = "select id from author_book" +
             " where exists(select id from author_book where book_id = ?)";
 
-    private static final String SQL_UPDATE_BOOK = "update book" +
+    private static final String SQL_UPDATE_BOOK               = "update book" +
             " set name = ?, description = ?," +
             " first_published = ?" +
             " where id = ?";
@@ -32,7 +31,7 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao, Dao<Book>
             " inner join author_book %s" +
             " on %s.id = %s.book_id" +
             " where %s.author_id = ?",
-            bookAlias, bookAlias, authorAlias, bookAlias, authorAlias, authorAlias);
+            bookAlias, bookAlias, authorBookAlias, bookAlias, authorBookAlias, authorBookAlias);
     private static final String SQL_SELECT_TEN_LATEST_BOOKS = "select * from book order by first_published desc limit 2";
 
     public BookDaoImpl() {
