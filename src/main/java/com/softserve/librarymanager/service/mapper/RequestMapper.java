@@ -1,4 +1,4 @@
-package com.softserve.librarymanager.servlet.mapper;
+package com.softserve.librarymanager.service.mapper;
 
 import com.softserve.librarymanager.model.AbstractEntity;
 

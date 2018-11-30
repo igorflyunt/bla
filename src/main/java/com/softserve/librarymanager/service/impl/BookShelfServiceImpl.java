@@ -7,8 +7,8 @@ import com.softserve.librarymanager.model.BookShelf;
 import com.softserve.librarymanager.service.AbstractService;
 import com.softserve.librarymanager.service.BookService;
 import com.softserve.librarymanager.service.BookShelfService;
-import com.softserve.librarymanager.servlet.mapper.BookShelfRequestMapper;
-import com.softserve.librarymanager.servlet.mapper.RequestMapper;
+import com.softserve.librarymanager.service.mapper.BookShelfRequestMapper;
+import com.softserve.librarymanager.service.mapper.RequestMapper;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.servlet.http.HttpServletRequest;
