@@ -11,6 +11,6 @@ public class DaoModule extends AbstractModule {
         bind(BookDao.class).to(BookDaoImpl.class);
         bind(GenreDao.class).to(GenreDaoImpl.class);
         bind(UserDao.class).to(UserDaoImpl.class);
-        bind(BookShelfDao.class).to(BookShelfDaoImpl.class);
+        bind(UserShelfDao.class).to(UserShelfDaoImpl.class);
     }
 }

@@ -4,7 +4,7 @@ import com.softserve.librarymanager.model.BookShelf;
 
 import java.util.List;
 
-public interface BookShelfDao extends Dao<BookShelf> {
+public interface UserShelfDao extends Dao<BookShelf> {
     List<BookShelf> findShelfByNameAndUserId(String shelfName, int userId);
 
     List<BookShelf> findAllShelvesByUserId(int userId);

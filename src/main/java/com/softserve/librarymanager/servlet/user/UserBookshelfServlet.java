@@ -6,7 +6,7 @@ import com.softserve.librarymanager.model.BookShelf;
 import com.softserve.librarymanager.model.User;
 import com.softserve.librarymanager.security.UserSession;
 import com.softserve.librarymanager.service.BookService;
-import com.softserve.librarymanager.service.BookShelfService;
+import com.softserve.librarymanager.service.UserShelfService;
 import com.softserve.librarymanager.servlet.Jsp;
 
 import javax.servlet.ServletException;
@@ -32,18 +32,18 @@ public class UserBookshelfServlet extends HttpServlet {
     }
 
     @Inject
-    private UserSession userSession;
+    private UserSession      userSession;
 
     @Inject
-    private BookService bookService;
+    private BookService      bookService;
 
     @Inject
-    private BookShelfService bookShelfService;
+    private UserShelfService userShelfService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
         User authorizedUser = userSession.getAuthorizedUser(request);
-        bookShelfService.saveBookToShelf(authorizedUser.getId(), request);
+        userShelfService.saveBookToShelf(authorizedUser.getId(), request);
         response.sendRedirect("/user/bookshelf?shelf=all");
     }
 
@@ -69,9 +69,9 @@ public class UserBookshelfServlet extends HttpServlet {
     private List<BookShelf> getAllShelvesOrOne(User user, String shelfName) {
         List<BookShelf> shelf;
         if (shelfName.equals("all")) {
-            shelf = bookShelfService.findAllShelvesByUserId(user.getId());
+            shelf = userShelfService.findAllShelvesByUserId(user.getId());
         } else {
-            shelf = bookShelfService.findShelfByNameAndUserId(shelfName, user.getId());
+            shelf = userShelfService.findShelfByNameAndUserId(shelfName, user.getId());
         }
         return shelf;
     }
