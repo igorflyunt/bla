@@ -1,10 +1,13 @@
-package com.softserve.librarymanager.service;
+package com.softserve.librarymanager.service.impl;
 
 import com.google.inject.Inject;
 import com.softserve.librarymanager.dao.AuthorDao;
 import com.softserve.librarymanager.dao.GenreDao;
 import com.softserve.librarymanager.model.Author;
 import com.softserve.librarymanager.model.Book;
+import com.softserve.librarymanager.service.AbstractService;
+import com.softserve.librarymanager.service.AuthorService;
+import com.softserve.librarymanager.service.BookService;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +17,7 @@ public class AuthorServiceImpl extends AbstractService<Author, AuthorDao> implem
     private BookService bookService;
 
     @Inject
-    private GenreDao    genreDao;
+    private GenreDao genreDao;
 
     @Inject
     public AuthorServiceImpl(AuthorDao dao) {

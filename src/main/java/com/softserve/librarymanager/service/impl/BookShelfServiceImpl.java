@@ -1,9 +1,12 @@
-package com.softserve.librarymanager.service;
+package com.softserve.librarymanager.service.impl;
 
 import com.google.inject.Inject;
 import com.softserve.librarymanager.dao.BookShelfDao;
 import com.softserve.librarymanager.dao.UserDao;
 import com.softserve.librarymanager.model.BookShelf;
+import com.softserve.librarymanager.service.AbstractService;
+import com.softserve.librarymanager.service.BookService;
+import com.softserve.librarymanager.service.BookShelfService;
 import com.softserve.librarymanager.servlet.mapper.BookShelfRequestMapper;
 import com.softserve.librarymanager.servlet.mapper.RequestMapper;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
