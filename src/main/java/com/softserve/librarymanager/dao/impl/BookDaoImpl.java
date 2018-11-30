@@ -19,10 +19,7 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao, Dao<Book>
             " values (?, ?, ?)";
     private static final String SQL_INSERT_BOOK_INTO_AUTHOR = "insert into author_book (author_id, book_id)" +
             " values (?, ?)";
-    private static final String SQL_AUTHOR_HAS_BOOK = "select id from author_book" +
-            " where exists(select id from author_book where book_id = ?)";
-
-    private static final String SQL_UPDATE_BOOK               = "update book" +
+    private static final String SQL_UPDATE_BOOK = "update book" +
             " set name = ?, description = ?," +
             " first_published = ?" +
             " where id = ?";
