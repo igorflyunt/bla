@@ -6,7 +6,7 @@
         <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
     </filter>
     <listener>
-        <listener-class>com.softserve.librarymanager.config.GuiceServletConfig</listener-class>
+        <listener-class>com.softserve.bookworm.config.GuiceServletConfig</listener-class>
     </listener>
     <filter-mapping>
         <filter-name>guiceFilter</filter-name>
