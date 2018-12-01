@@ -20,6 +20,9 @@
                                     <a class="custom-link" href="/author?authorId=${author.id}">${author.firstName} ${author.lastName}
                                     </a>${loop.last ? "" : ",  "}
                                 </small>
+                                <p>
+                                   Publication year: ${book.firstPublished}
+                                </p>
                             </c:forEach>
                         </div>
                         <div class="media-body col-sm-3" >

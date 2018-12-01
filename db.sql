@@ -22,7 +22,7 @@
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `author` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL auto_increment,
   `first_name` varchar(80) DEFAULT NULL,
   `last_name` varchar(80) DEFAULT NULL,
   `birth_date` date DEFAULT NULL,
@@ -46,7 +46,7 @@ INSERT INTO `author` VALUES (3,'George','Orwell','1903-02-20','Eric Arthur Blair
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `author_book` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL auto_increment,
   `author_id` int(11) DEFAULT NULL,
   `book_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -72,7 +72,7 @@ INSERT INTO `author_book` VALUES (10,3,8),(11,5,9);
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `book` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL auto_increment,
   `name` text,
   `description` text,
   `first_published` date DEFAULT NULL,
@@ -95,7 +95,7 @@ INSERT INTO `book` VALUES (8,'1984','Among the seminal texts of the 20th century
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `book_shelf` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL auto_increment,
   `user_id` int(11) DEFAULT NULL,
   `book_id` int(11) DEFAULT NULL,
   `shelf_name` varchar(50) DEFAULT NULL,
@@ -123,7 +123,7 @@ INSERT INTO `book_shelf` VALUES (7,1,8,'currently-reading'),(11,1,9,'read'),(13,
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genre` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL auto_increment,
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
@@ -144,7 +144,7 @@ INSERT INTO `genre` VALUES (2,'horror'),(3,'thriller'),(4,'thriller');
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genre_author` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL auto_increment,
   `genre_id` int(11) DEFAULT NULL,
   `author_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -169,7 +169,7 @@ CREATE TABLE `genre_author` (
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genre_book` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL auto_increment,
   `genre_id` int(11) DEFAULT NULL,
   `book_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -194,7 +194,7 @@ CREATE TABLE `genre_book` (
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL auto_increment,
   `first_name` varchar(80) DEFAULT NULL,
   `last_name` varchar(80) DEFAULT NULL,
   `role` varchar(15) DEFAULT NULL,

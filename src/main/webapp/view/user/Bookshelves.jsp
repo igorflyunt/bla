@@ -24,7 +24,7 @@
                             <h6 class="mt-0 mb-1"><a class="custom-link" href="/book?bookid=${shelf.book.id}">${shelf.book.name}</a></h6>
                             <c:forEach items="${shelf.book.authors}" var="author" varStatus="loop">
                                 <small>
-                                    <a class="custom-link" href="/author?userId=${author.id}">${author.firstName} ${author.lastName}
+                                    <a class="custom-link" href="/author?authorId=${author.id}">${author.firstName} ${author.lastName}
                                     </a>${loop.last ? "" : ",  "}
                                 </small>
                             </c:forEach>

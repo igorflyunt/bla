@@ -52,7 +52,7 @@ public class BookShelfServiceImpl extends AbstractService<BookShelf, BookShelfDa
     public List<BookShelf> findAllShelvesByUserId(int userId) {
         List<BookShelf> shelves = getDao().findAllShelvesByUserId(userId);
         initBookShelfEagerly(shelves);
-        System.out.println(shelves);
+
         return shelves;
     }
 

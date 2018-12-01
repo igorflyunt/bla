@@ -29,15 +29,6 @@ public final class JDBCQuery {
         return entity;
     }
 
-    public static boolean execute(String query, Object... paramArgs) {
-        try {
-            PreparedStatement st = setupPreparedStatement(query, paramArgs);
-            return st.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static <T extends AbstractEntity> List<T> selectMany(String query, EntityMapper<T> entityMapper,
                                                                 Object... paramArgs) {
         List<T> entities = new ArrayList<>();
