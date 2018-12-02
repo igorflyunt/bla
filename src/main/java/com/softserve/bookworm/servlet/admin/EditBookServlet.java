@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @WebServlet("/admin/book")
@@ -30,18 +27,7 @@ public class EditBookServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int authorId = getIdParameterIfExists(request.getParameter("authorId"));
-        String bookName = request.getParameter("bookName");
-        String bookDescription = request.getParameter("bookDescription");
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Book book = new Book();
-
-        try {
-            Date firstPublished = format.parse();
-            book.setFirstPublished(firstPublished);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        bookService.save(book);
+        Book book = bookService.save(request);
         if (authorId != AbstractEntity.NO_ELEMENT)
             bookService.mapBookToAuthor(book.getId(), authorId);
         response.sendRedirect("/admin/books");
@@ -59,13 +45,6 @@ public class EditBookServlet extends HttpServlet {
         if (stringParam == null || stringParam.isEmpty())
             return AbstractEntity.NO_ELEMENT;
         return Integer.parseInt(stringParam);
-    }
-
-    private void setEntityIdIfExists(String stringId, AbstractEntity entity) {
-        if (stringId == null || stringId.isEmpty())
-            return;
-        int id = Integer.parseInt(stringId);
-        entity.setId(id);
     }
 
     @Override
