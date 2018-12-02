@@ -63,7 +63,7 @@
             </div>
             <div class="form-group">
                 <label>Birth date:</label>
-                <input type="hidden" name="id" value="${author.id}">
+                <input type="hidden" name="authorId" value="${author.id}">
                 <input class="form-control" name="birthDate" type="date" value="${author.birthDate}">
             </div>
             <button  type="submit" class="btn btn-secondary btn-sm float-right mb-4">Save</button>
