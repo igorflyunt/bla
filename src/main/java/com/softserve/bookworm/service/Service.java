@@ -9,7 +9,7 @@ public interface Service<E> {
 
     List<E> findAll();
 
-    void save(HttpServletRequest request);
+    E save(HttpServletRequest request);
 
     void delete(E entity);
 }

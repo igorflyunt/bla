@@ -20,9 +20,9 @@ public abstract class AbstractService<E extends AbstractEntity, D extends Dao<E>
     }
 
     @Override
-    public void save(HttpServletRequest request) {
+    public E save(HttpServletRequest request) {
         E entity = requestMapper.mapToEntity(request);
-        this.dao.saveOrUpdate(entity);
+        return this.dao.saveOrUpdate(entity);
     }
 
     @Override
