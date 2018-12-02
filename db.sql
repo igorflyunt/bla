@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: bookworm
+-- Host: 127.0.0.1    Database: librarymanager
 -- ------------------------------------------------------
 -- Server version	5.7.24
 
@@ -19,16 +19,17 @@
 -- Table structure for table `author`
 --
 
+DROP TABLE IF EXISTS `author`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `author` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(80) DEFAULT NULL,
   `last_name` varchar(80) DEFAULT NULL,
   `birth_date` date DEFAULT NULL,
   `biography` text,
   PRIMARY KEY (`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,10 +44,11 @@ INSERT INTO `author` VALUES (3,'George','Orwell','1903-02-20','Eric Arthur Blair
 -- Table structure for table `author_book`
 --
 
+DROP TABLE IF EXISTS `author_book`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `author_book` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `author_id` int(11) DEFAULT NULL,
   `book_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -54,7 +56,7 @@ CREATE TABLE `author_book` (
   KEY `book_id` (`book_id`),
   CONSTRAINT `author_book_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `author` (`id`) ON DELETE CASCADE,
   CONSTRAINT `author_book_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE CASCADE
-);
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,15 +71,16 @@ INSERT INTO `author_book` VALUES (10,3,8),(11,5,9);
 -- Table structure for table `book`
 --
 
+DROP TABLE IF EXISTS `book`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `book` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text,
   `description` text,
   `first_published` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,10 +95,11 @@ INSERT INTO `book` VALUES (8,'1984','Among the seminal texts of the 20th century
 -- Table structure for table `book_shelf`
 --
 
+DROP TABLE IF EXISTS `book_shelf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `book_shelf` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `book_id` int(11) DEFAULT NULL,
   `shelf_name` varchar(50) DEFAULT NULL,
@@ -105,7 +109,7 @@ CREATE TABLE `book_shelf` (
   KEY `book_id` (`book_id`),
   CONSTRAINT `book_shelf_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `book_shelf_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE CASCADE
-);
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,20 +117,21 @@ CREATE TABLE `book_shelf` (
 --
 
 /*!40000 ALTER TABLE `book_shelf` DISABLE KEYS */;
-INSERT INTO `book_shelf` VALUES (7,1,8,'currently-reading'),(11,1,9,'read'),(13,2,8,'to-read'),(14,2,9,'read');
+INSERT INTO `book_shelf` VALUES (7,1,8,'currently-reading'),(11,1,9,'to-read'),(13,2,8,'to-read'),(14,2,9,'read');
 /*!40000 ALTER TABLE `book_shelf` ENABLE KEYS */;
 
 --
 -- Table structure for table `genre`
 --
 
+DROP TABLE IF EXISTS `genre`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genre` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -141,10 +146,11 @@ INSERT INTO `genre` VALUES (2,'horror'),(3,'thriller'),(4,'thriller');
 -- Table structure for table `genre_author`
 --
 
+DROP TABLE IF EXISTS `genre_author`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genre_author` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `genre_id` int(11) DEFAULT NULL,
   `author_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -152,7 +158,7 @@ CREATE TABLE `genre_author` (
   KEY `author_id` (`author_id`),
   CONSTRAINT `genre_author_ibfk_1` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`id`) ON DELETE CASCADE,
   CONSTRAINT `genre_author_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `author` (`id`) ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,10 +172,11 @@ CREATE TABLE `genre_author` (
 -- Table structure for table `genre_book`
 --
 
+DROP TABLE IF EXISTS `genre_book`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genre_book` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `genre_id` int(11) DEFAULT NULL,
   `book_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -177,7 +184,7 @@ CREATE TABLE `genre_book` (
   KEY `book_id` (`book_id`),
   CONSTRAINT `genre_book_ibfk_1` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`id`) ON DELETE CASCADE,
   CONSTRAINT `genre_book_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,17 +198,18 @@ CREATE TABLE `genre_book` (
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(80) DEFAULT NULL,
   `last_name` varchar(80) DEFAULT NULL,
   `role` varchar(15) DEFAULT NULL,
   `username` varchar(60) DEFAULT NULL,
   `password` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,4 +229,4 @@ INSERT INTO `user` VALUES (1,'Igor','Flyunt','USER','iflyunt','root'),(2,'Test',
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-29 11:27:42
+-- Dump completed on 2018-12-02 17:49:10
