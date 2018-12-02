@@ -22,7 +22,6 @@ public class EditAuthorServlet extends HttpServlet {
     private AuthorService authorService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         authorService.save(request);
         response.sendRedirect("/admin/author");
     }

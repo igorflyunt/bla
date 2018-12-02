@@ -34,11 +34,9 @@ public class EditBookServlet extends HttpServlet {
         String bookDescription = request.getParameter("bookDescription");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Book book = new Book();
-        setEntityIdIfExists(request.getParameter("bookId"), book);
-        book.setBookName(bookName);
-        book.setDescription(bookDescription);
+
         try {
-            Date firstPublished = format.parse(request.getParameter("publicationYear"));
+            Date firstPublished = format.parse();
             book.setFirstPublished(firstPublished);
         } catch (ParseException e) {
             e.printStackTrace();
