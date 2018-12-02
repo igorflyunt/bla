@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class AuthorRequestMapper extends AbstractRequestMapper<Author> implements RequestMapper<Author> {
 
-    protected AuthorRequestMapper() {
+    public AuthorRequestMapper() {
         super(new Author());
     }
 
