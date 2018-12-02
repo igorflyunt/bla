@@ -15,7 +15,7 @@ public final class DateUtil {
         } catch (ParseException e) {
             // TODO must be logged
             // TODO add custom more specific unchecked exception instead of using a general RuntimeException
-            throw new RuntimeException(e);
+            return null;
         }
     }
 }
