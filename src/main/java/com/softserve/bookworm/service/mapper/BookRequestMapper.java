@@ -5,7 +5,7 @@ import com.softserve.bookworm.model.Book;
 import javax.servlet.http.HttpServletRequest;
 
 public class BookRequestMapper extends AbstractRequestMapper<Book> implements RequestMapper<Book> {
-    protected BookRequestMapper() {
+    public BookRequestMapper() {
         super(new Book());
     }
 
