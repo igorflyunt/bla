@@ -13,7 +13,6 @@ public class AuthorRequestMapper extends AbstractRequestMapper<Author> implement
 
     @Override
     public Author mapToEntity(HttpServletRequest request) {
-        setEntityIdIfExists(request.getParameter("id"));
         entity.setFirstName(request.getParameter("firstName"));
         entity.setLastName(request.getParameter("lastName"));
         entity.setBiography(request.getParameter("biography"));
