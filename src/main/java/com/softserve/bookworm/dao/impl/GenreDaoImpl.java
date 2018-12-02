@@ -5,6 +5,7 @@ import com.softserve.bookworm.dao.Dao;
 import com.softserve.bookworm.dao.GenreDao;
 import com.softserve.bookworm.dao.mapper.EntityMapper;
 import com.softserve.bookworm.dao.mapper.impl.GenreMapper;
+import com.softserve.bookworm.dao.table.TableAliases;
 import com.softserve.bookworm.dao.table.TablePrimaryKeyPair;
 import com.softserve.bookworm.db.JDBCQuery;
 import com.softserve.bookworm.model.Author;
@@ -14,10 +15,6 @@ import com.softserve.bookworm.model.Genre;
 import java.util.List;
 
 public class GenreDaoImpl extends AbstractDao<Genre> implements GenreDao, Dao<Genre> {
-    private static final String genreAlias = "g";
-    private static final String genreAuthorAlias = "ga";
-    private static final String genreBookAlias = "gb";
-
     private static final String SQL_INSERT_GENRE = "insert into genre (name) values(?)";
     private static final String SQL_INSERT_GENRE_INTO_AUTHOR = "insert into genre_author (genre_id, author_id)" +
             " values(?, ?)";
@@ -28,14 +25,14 @@ public class GenreDaoImpl extends AbstractDao<Genre> implements GenreDao, Dao<Ge
             "select %s.* from genre %s" +
             " inner join genre_author %s" +
             " on %s.id = %s.genre_id" +
-            " where %s.author_id = ?",
-            genreAlias, genreAlias, genreAuthorAlias, genreAlias, genreAuthorAlias, genreAuthorAlias);
+            " where %s.author_id = ?", TableAliases.GENRE, TableAliases.GENRE, TableAliases.GENRE_AUTHOR,
+            TableAliases.GENRE, TableAliases.GENRE_AUTHOR, TableAliases.GENRE_AUTHOR);
     private static final String SQL_SELECT_GENRES_BY_BOOK_ID = String.format(
             "select %s.* from genre %s" +
             " inner join genre_book %s" +
             " on %s.id = %s.genre_id" +
-            " where %s.book_id = ?",
-            genreAlias, genreAlias, genreBookAlias, genreAlias, genreBookAlias, genreBookAlias);
+            " where %s.book_id = ?", TableAliases.GENRE, TableAliases.GENRE, TableAliases.GENRE_BOOK,
+            TableAliases.GENRE, TableAliases.GENRE_BOOK, TableAliases.GENRE_BOOK);
 
     public GenreDaoImpl() {
         this(TablePrimaryKeyPair.GENRE, new GenreMapper());
@@ -47,12 +44,12 @@ public class GenreDaoImpl extends AbstractDao<Genre> implements GenreDao, Dao<Ge
 
     @Override
     public List<Genre> findGenresByBookId(int bookId) {
-        return JDBCQuery.selectMany(SQL_SELECT_GENRES_BY_BOOK_ID, new GenreMapper(genreAlias), bookId);
+        return JDBCQuery.selectMany(SQL_SELECT_GENRES_BY_BOOK_ID, new GenreMapper(TableAliases.GENRE), bookId);
     }
 
     @Override
     public List<Genre> findGenresByAuthorId(int authorId) {
-        return JDBCQuery.selectMany(SQL_SELECT_GENRES_BY_AUTHOR_ID, new GenreMapper(genreAuthorAlias), authorId);
+        return JDBCQuery.selectMany(SQL_SELECT_GENRES_BY_AUTHOR_ID, new GenreMapper(TableAliases.GENRE_AUTHOR), authorId);
     }
 
     @Override

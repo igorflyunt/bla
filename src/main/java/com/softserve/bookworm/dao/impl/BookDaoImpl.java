@@ -4,6 +4,7 @@ import com.softserve.bookworm.dao.AbstractDao;
 import com.softserve.bookworm.dao.BookDao;
 import com.softserve.bookworm.dao.Dao;
 import com.softserve.bookworm.dao.mapper.impl.BookMapper;
+import com.softserve.bookworm.dao.table.TableAliases;
 import com.softserve.bookworm.dao.table.TablePrimaryKeyPair;
 import com.softserve.bookworm.db.JDBCQuery;
 import com.softserve.bookworm.model.Book;
@@ -11,9 +12,6 @@ import com.softserve.bookworm.model.Book;
 import java.util.List;
 
 public class BookDaoImpl extends AbstractDao<Book> implements BookDao, Dao<Book> {
-    private static final String bookAlias = "b";
-    private static final String authorBookAlias = "ab";
-
     private static final String SQL_INSERT_BOOK = "insert into book (name, description, first_published)" +
             " values (?, ?, ?)";
     private static final String SQL_INSERT_BOOK_INTO_AUTHOR = "insert into author_book (author_id, book_id)" +
@@ -26,8 +24,8 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao, Dao<Book>
             "select %s.* from book %s" +
             " inner join author_book %s" +
             " on %s.id = %s.book_id" +
-            " where %s.author_id = ?",
-            bookAlias, bookAlias, authorBookAlias, bookAlias, authorBookAlias, authorBookAlias);
+            " where %s.author_id = ?", TableAliases.BOOK, TableAliases.BOOK, TableAliases.AUTHOR_BOOK,
+            TableAliases.BOOK, TableAliases.AUTHOR_BOOK, TableAliases.AUTHOR_BOOK);
     private static final String SQL_SELECT_TEN_LATEST_BOOKS = "select * from book order by first_published desc limit 2";
 
     public BookDaoImpl() {
@@ -40,7 +38,7 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao, Dao<Book>
 
     @Override
     public List<Book> findAllBooksByAuthorId(int authorId) {
-        return JDBCQuery.selectMany(SQL_SELECT_BOOKS_BY_AUTHOR_ID, new BookMapper(bookAlias), authorId);
+        return JDBCQuery.selectMany(SQL_SELECT_BOOKS_BY_AUTHOR_ID, new BookMapper(TableAliases.BOOK), authorId);
     }
 
     @Override
