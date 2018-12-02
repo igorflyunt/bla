@@ -31,7 +31,7 @@ public class EditAuthorServlet extends HttpServlet {
     }
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
         int authorId = Integer.parseInt(req.getParameter("authorId"));
         authorService.findById(authorId).ifPresent(authorService::delete);
     }

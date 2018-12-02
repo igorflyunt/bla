@@ -2,7 +2,6 @@ package com.softserve.bookworm.servlet.admin;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.softserve.bookworm.model.AbstractEntity;
 import com.softserve.bookworm.model.Book;
 import com.softserve.bookworm.service.AuthorService;
 import com.softserve.bookworm.service.BookService;
@@ -26,10 +25,7 @@ public class EditBookServlet extends HttpServlet {
     private BookService bookService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int authorId = getIdParameterIfExists(request.getParameter("authorId"));
-        Book book = bookService.save(request);
-        if (authorId != AbstractEntity.NO_ELEMENT)
-            bookService.addBookToAuthor(book.getId(), authorId);
+        addBookToAuthorOrUpdate(request);
         response.sendRedirect("/admin/books");
     }
 
@@ -41,14 +37,15 @@ public class EditBookServlet extends HttpServlet {
         request.getRequestDispatcher(Jsp.BOOK_EDITOR_VIEW).forward(request, response);
     }
 
-    private int getIdParameterIfExists(String stringParam) {
-        if (stringParam == null || stringParam.isEmpty())
-            return AbstractEntity.NO_ELEMENT;
-        return Integer.parseInt(stringParam);
+    private void addBookToAuthorOrUpdate(HttpServletRequest request) {
+        String authorId = request.getParameter("authorId");
+        Book book = bookService.save(request);
+        if (authorId != null)
+            bookService.addBookToAuthor(book.getId(), Integer.parseInt(authorId));
     }
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
         int bookId = Integer.parseInt(req.getParameter("bookId"));
         bookService.findById(bookId).ifPresent(bookService::delete);
     }

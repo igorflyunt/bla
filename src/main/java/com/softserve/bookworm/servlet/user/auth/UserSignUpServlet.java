@@ -19,9 +19,7 @@ public class UserSignUpServlet extends HttpServlet {
     @Inject
     UserDao userDao;
 
-    protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String username = request.getParameter("username");
@@ -35,8 +33,8 @@ public class UserSignUpServlet extends HttpServlet {
         response.sendRedirect("/user/auth/signin");
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+            IOException {
         request.getRequestDispatcher(Jsp.USER_SIGN_UP_VIEW).forward(request, response);
     }
 }

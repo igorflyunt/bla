@@ -18,10 +18,6 @@ public class AuthorDetailsServlet extends HttpServlet {
     @Inject
     private AuthorService authorService;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int authorId = Integer.parseInt(request.getParameter("authorId"));

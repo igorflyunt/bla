@@ -39,8 +39,7 @@ public class UserBookshelfServlet extends HttpServlet {
     @Inject
     private UserShelfService userShelfService;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-            IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User authorizedUser = userSession.getAuthorizedUser(request);
         userShelfService.saveBookToShelf(authorizedUser.getId(), request);
         response.sendRedirect("/user/bookshelf?shelf=all");

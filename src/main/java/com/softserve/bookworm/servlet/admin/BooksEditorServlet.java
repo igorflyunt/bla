@@ -20,11 +20,6 @@ public class BooksEditorServlet extends HttpServlet {
     @Inject
     private BookService bookService;
 
-    protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         final List<Book> books = bookService.findAll();
