@@ -8,7 +8,6 @@ import com.softserve.bookworm.service.AbstractService;
 import com.softserve.bookworm.service.BookService;
 import com.softserve.bookworm.service.UserShelfService;
 import com.softserve.bookworm.service.mapper.BookShelfRequestMapper;
-import com.softserve.bookworm.service.mapper.RequestMapper;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,16 +21,14 @@ public class UserShelfServiceImpl extends AbstractService<BookShelf, UserShelfDa
     @Inject
     private UserDao userDao;
 
-    private RequestMapper<BookShelf> bookShelfRequestMapper = new BookShelfRequestMapper();
-
     @Inject
     public UserShelfServiceImpl(UserShelfDao dao) {
-        super(dao);
+        super(dao,  new BookShelfRequestMapper());
     }
 
     @Override
     public void saveBookToShelf(int userId, HttpServletRequest bookShelfRequest) {
-        BookShelf bookShelf = bookShelfRequestMapper.mapToEntity(bookShelfRequest);
+        BookShelf bookShelf = requestMapper.mapToEntity(bookShelfRequest);
         userDao.findById(userId).ifPresent(bookShelf::setUser);
         int bookId = Integer.parseInt(bookShelfRequest.getParameter("bookId"));
         bookService.findById(bookId).ifPresent(bookShelf::setBook);
