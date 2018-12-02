@@ -29,7 +29,7 @@ public class EditBookServlet extends HttpServlet {
         int authorId = getIdParameterIfExists(request.getParameter("authorId"));
         Book book = bookService.save(request);
         if (authorId != AbstractEntity.NO_ELEMENT)
-            bookService.mapBookToAuthor(book.getId(), authorId);
+            bookService.addBookToAuthor(book.getId(), authorId);
         response.sendRedirect("/admin/books");
     }
 

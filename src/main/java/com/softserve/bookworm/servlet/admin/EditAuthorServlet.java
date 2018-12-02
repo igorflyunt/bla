@@ -2,7 +2,6 @@ package com.softserve.bookworm.servlet.admin;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.softserve.bookworm.model.AbstractEntity;
 import com.softserve.bookworm.model.Author;
 import com.softserve.bookworm.service.AuthorService;
 import com.softserve.bookworm.servlet.Jsp;
@@ -35,12 +34,5 @@ public class EditAuthorServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int authorId = Integer.parseInt(req.getParameter("authorId"));
         authorService.findById(authorId).ifPresent(authorService::delete);
-    }
-
-    private void setEntityIdIfExists(String stringId, AbstractEntity entity) {
-        if (stringId == null || stringId.isEmpty())
-            return;
-        int id = Integer.parseInt(stringId);
-        entity.setId(id);
     }
 }

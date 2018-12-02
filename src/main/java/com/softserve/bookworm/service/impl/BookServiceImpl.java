@@ -46,7 +46,7 @@ public class BookServiceImpl extends AbstractService<Book, BookDao> implements B
     }
 
     @Override
-    public void mapBookToAuthor(int bookId, int authorId) {
+    public void addBookToAuthor(int bookId, int authorId) {
         getDao().mapBookToAuthor(bookId, authorId);
     }
 

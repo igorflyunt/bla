@@ -9,5 +9,5 @@ public interface BookService extends Service<Book> {
 
     List<Book> findTenLatestBooks();
 
-    void mapBookToAuthor(int bookId, int authorId);
+    void addBookToAuthor(int bookId, int authorId);
 }
