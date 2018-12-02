@@ -7,6 +7,7 @@ import com.softserve.bookworm.model.Book;
 import com.softserve.bookworm.service.AbstractService;
 import com.softserve.bookworm.service.AuthorService;
 import com.softserve.bookworm.service.BookService;
+import com.softserve.bookworm.service.mapper.BookRequestMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,11 +17,11 @@ public class BookServiceImpl extends AbstractService<Book, BookDao> implements B
     private AuthorService authorDao;
 
     @Inject
-    private GenreDao      genreDao;
+    private GenreDao genreDao;
 
     @Inject
     public BookServiceImpl(BookDao dao) {
-        super(dao);
+        super(dao, new BookRequestMapper());
     }
 
     @Override
