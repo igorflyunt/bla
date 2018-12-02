@@ -1,5 +1,6 @@
 package com.softserve.bookworm.service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +9,7 @@ public interface Service<E> {
 
     List<E> findAll();
 
-    void save(E entity);
+    void save(HttpServletRequest request);
 
     void delete(E entity);
 }

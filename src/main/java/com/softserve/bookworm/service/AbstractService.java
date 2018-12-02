@@ -1,12 +1,18 @@
 package com.softserve.bookworm.service;
 
 import com.softserve.bookworm.dao.Dao;
+import com.softserve.bookworm.model.AbstractEntity;
+import com.softserve.bookworm.service.mapper.RequestMapper;
 
-public abstract class AbstractService<E, D extends Dao<E>> implements Service<E> {
-    private D dao;
+import javax.servlet.http.HttpServletRequest;
 
-    public AbstractService(D dao) {
+public abstract class AbstractService<E extends AbstractEntity, D extends Dao<E>> implements Service<E> {
+    private D                dao;
+    private RequestMapper<E> requestMapper;
+
+    public AbstractService(D dao, RequestMapper<E> requestMapper) {
         this.dao = dao;
+        this.requestMapper = requestMapper;
     }
 
     public D getDao() {
@@ -14,7 +20,8 @@ public abstract class AbstractService<E, D extends Dao<E>> implements Service<E>
     }
 
     @Override
-    public void save(E entity) {
+    public void save(HttpServletRequest request) {
+        E entity = requestMapper.mapToEntity(request);
         this.dao.saveOrUpdate(entity);
     }
 
