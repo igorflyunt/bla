@@ -7,8 +7,8 @@ import com.softserve.bookworm.service.mapper.RequestMapper;
 import javax.servlet.http.HttpServletRequest;
 
 public abstract class AbstractService<E extends AbstractEntity, D extends Dao<E>> implements Service<E> {
-    private D                dao;
-    private RequestMapper<E> requestMapper;
+    private D dao;
+    protected RequestMapper<E> requestMapper;
 
     public AbstractService(D dao, RequestMapper<E> requestMapper) {
         this.dao = dao;
