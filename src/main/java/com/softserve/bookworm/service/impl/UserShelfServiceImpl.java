@@ -7,7 +7,7 @@ import com.softserve.bookworm.model.BookShelf;
 import com.softserve.bookworm.service.AbstractService;
 import com.softserve.bookworm.service.BookService;
 import com.softserve.bookworm.service.UserShelfService;
-import com.softserve.bookworm.service.mapper.BookShelfRequestMapper;
+import com.softserve.bookworm.service.mapper.impl.BookShelfRequestMapper;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.servlet.http.HttpServletRequest;

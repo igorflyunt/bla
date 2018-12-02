@@ -8,7 +8,7 @@ import com.softserve.bookworm.model.Book;
 import com.softserve.bookworm.service.AbstractService;
 import com.softserve.bookworm.service.AuthorService;
 import com.softserve.bookworm.service.BookService;
-import com.softserve.bookworm.service.mapper.AuthorRequestMapper;
+import com.softserve.bookworm.service.mapper.impl.AuthorRequestMapper;
 
 import java.util.List;
 import java.util.Optional;

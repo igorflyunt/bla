@@ -1,6 +1,8 @@
-package com.softserve.bookworm.service.mapper;
+package com.softserve.bookworm.service.mapper.impl;
 
 import com.softserve.bookworm.model.Book;
+import com.softserve.bookworm.service.mapper.AbstractRequestMapper;
+import com.softserve.bookworm.service.mapper.RequestMapper;
 import com.softserve.bookworm.servlet.util.DateUtil;
 
 import javax.servlet.http.HttpServletRequest;
