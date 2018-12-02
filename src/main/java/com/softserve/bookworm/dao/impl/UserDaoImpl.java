@@ -40,9 +40,10 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     @Override
-    public void saveOrUpdate(User entity) {
+    public User saveOrUpdate(User entity) {
         JDBCQuery.update(entity, SQL_INSERT_USER, entity.getFirstName(), entity.getLastName(), entity.getRole(),
                 entity.getUsername(),
                 entity.getPassword());
+        return entity;
     }
 }

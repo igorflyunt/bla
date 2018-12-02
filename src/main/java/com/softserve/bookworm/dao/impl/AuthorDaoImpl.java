@@ -38,7 +38,7 @@ public class AuthorDaoImpl extends AbstractDao<Author> implements AuthorDao, Dao
     }
 
     @Override
-    public void saveOrUpdate(Author entity) {
+    public Author saveOrUpdate(Author entity) {
         int authorId = entity.getId();
         if (entityExists(authorId)) {
             JDBCQuery.update(entity, SQL_UPDATE_AUTHOR, entity.getFirstName(), entity.getLastName(), entity.getBirthDate(),
@@ -48,5 +48,6 @@ public class AuthorDaoImpl extends AbstractDao<Author> implements AuthorDao, Dao
             JDBCQuery.update(entity, SQL_INSERT_AUTHOR, entity.getFirstName(), entity.getLastName(), entity.getBirthDate(),
                     entity.getBiography());
         }
+        return entity;
     }
 }

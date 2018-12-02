@@ -36,9 +36,10 @@ public class UserShelfDaoImpl extends AbstractDao<BookShelf> implements UserShel
     }
 
     @Override
-    public void saveOrUpdate(BookShelf entity) {
+    public BookShelf saveOrUpdate(BookShelf entity) {
         JDBCQuery.update(entity, SQL_INSERT_SHELF, entity.getUser().getId(), entity.getBook().getId(),
                 entity.getBookShelfName(),
                 entity.getBookShelfName());
+        return entity;
     }
 }
