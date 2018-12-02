@@ -13,9 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @WebServlet("/admin/author")
@@ -25,23 +22,8 @@ public class EditAuthorServlet extends HttpServlet {
     private AuthorService authorService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String bio = request.getParameter("biography");
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-        Author author = new Author();
-        setEntityIdIfExists(request.getParameter("id"), author);
-        author.setFirstName(firstName);
-        author.setLastName(lastName);
-        author.setBiography(bio);
-        try {
-            Date birthDate = format.parse(request.getParameter("birthDate"));
-            author.setBirthDate(birthDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        authorService.save(author);
+        authorService.save(request);
         response.sendRedirect("/admin/author");
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
