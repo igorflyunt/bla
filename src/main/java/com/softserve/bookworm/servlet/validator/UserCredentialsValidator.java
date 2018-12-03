@@ -34,18 +34,19 @@ public class UserCredentialsValidator implements Validator {
         return this;
     }
 
-    public UserCredentialsValidator comparePasswords(String storedPassword, String loginPassword) {
+    public boolean comparePasswords(String storedPassword, String loginPassword) {
         Predicate<String> predicate = Validator.notNullOrEmpty().and(Predicate.isEqual(loginPassword));
-        predicateValuePair.put(predicate, storedPassword);
-        return this;
+        return predicate.test(storedPassword);
     }
 
     @Override
     public boolean isDataValid() {
         for (Map.Entry<Predicate<String>, String> predicatePair : predicateValuePair.entrySet()) {
             boolean dataIsNotValid = !predicatePair.getKey().test(predicatePair.getValue());
-            if (dataIsNotValid)
-                return false; }
+            if (dataIsNotValid) {
+                return false;
+            }
+        }
         return true;
     }
 }
