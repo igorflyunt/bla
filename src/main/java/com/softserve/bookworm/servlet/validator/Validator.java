@@ -18,6 +18,5 @@ public interface Validator {
     static Predicate<String> notNull() {
         Predicate<String> predicate = Objects::isNull;
         return predicate.negate();
-
     }
 }

@@ -40,8 +40,12 @@ public class EditBookServlet extends HttpServlet {
     private void addBookToAuthorOrUpdate(HttpServletRequest request) {
         String authorId = request.getParameter("authorId");
         Book book = bookService.save(request);
-        if (authorId != null)
+        if (bookEditingRequested(authorId))
             bookService.addBookToAuthor(book.getId(), Integer.parseInt(authorId));
+    }
+
+    private boolean bookEditingRequested(String authorId) {
+        return authorId != null;
     }
 
     @Override
