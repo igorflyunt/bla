@@ -1,6 +1,7 @@
 package com.softserve.bookworm.servlet.admin;
 
 import com.google.inject.Singleton;
+import com.softserve.bookworm.servlet.validator.UserCredentialsValidator;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
